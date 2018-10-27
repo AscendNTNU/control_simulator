@@ -1,4 +1,5 @@
 FROM gazebo:libgazebo7
+MAINTAINER "rendellc@ascendntnu.no"
 
 # install dependencies
 ENV GZWEB_WS /root/gzweb
@@ -26,7 +27,6 @@ RUN hg clone https://bitbucket.org/osrf/gzweb $GZWEB_WS
 RUN curl -sL https://deb.nodesource.com/setup_8.x >> setup_8.sh \
   && chmod +x setup_8.sh \
   && ./setup_8.sh \
-  && apt-get update \
   && apt-get install -y nodejs \
   && rm -rf /var/lib/apt/lists/*
 
@@ -41,6 +41,5 @@ RUN /bin/bash -c "source /usr/share/gazebo/setup.sh" \
 # gzserver also needs 11345
 EXPOSE 8080
 
-
-
+CMD ["/bin/bash", "-c", "gzserver --verbose & npm start"]
 
