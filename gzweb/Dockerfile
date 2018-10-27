@@ -38,8 +38,8 @@ RUN /bin/bash -c "source /usr/share/gazebo/setup.sh" \
   && npm run deploy --- -m local
 
 # setup environemt
-# gzserver also needs 11345
 EXPOSE 8080
+EXPOSE 11345
 
-CMD ["/bin/bash", "-c", "gzserver --verbose & npm start"]
+CMD ["/bin/bash", "-c", "npm start"]
 

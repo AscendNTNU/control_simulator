@@ -4,6 +4,11 @@ services:
     build: ./gzweb
     ports: 
       - "8080:8080"
+      - "11345:11345"
+  gzserver:
+    build: ./gzserver
+    ports:
+      - "11345:11345"
 
 
 
