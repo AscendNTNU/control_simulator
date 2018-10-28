@@ -1,13 +1,49 @@
-FROM px4io/px4-dev-nuttx
+FROM ubuntu:16.04
 MAINTAINER "rendellc@ascendntnu.no"
 
-# get px4, TODO: use ascends private px4 instead
-WORKDIR /src/firmware
-RUN git clone https://github.com/PX4/Firmware.git 
+# install build dependencies, TODO: unite RUN statements
+RUN apt-get update && apt-get install -y  \
+  build-essential \
+  cmake \
+  exiftool \
+  genromfs \
+  git \
+  ninja-build \
+  python-argparse \
+  python-dev \
+  python-empy \
+  python-numpy \
+  python-pip \
+  python-toml \
+  wget \
+  zip 
+RUN python -m pip install --upgrade pip \
+  && python -m pip install pandas jinja2 pyserial pyulog
+WORKDIR /home/user
+RUN wget http://www.eprosima.com/index.php/component/ars/repository/eprosima-fast-rtps/eprosima-fast-rtps-1-5-0/eprosima_fastrtps-1-5-0-linux-tar-gz -O eprosima_fastrtps-1-5-0-linux.tar.gz \
+    && tar -xzf eprosima_fastrtps-1-5-0-linux.tar.gz eProsima_FastRTPS-1.5.0-Linux/ \
+    && tar -xzf eprosima_fastrtps-1-5-0-linux.tar.gz requiredcomponents \
+    && tar -xzf requiredcomponents/eProsima_FastCDR-1.0.7-Linux.tar.gz \
+    && cpucores=$(( $(lscpu | grep Core.*per.*socket | awk -F: '{print $2}') * $(lscpu | grep Socket\(s\) | awk -F: '{print $2}') )) \
+    && cd eProsima_FastCDR-1.0.7-Linux; ./configure --libdir=/usr/lib; make -j$cpucores; make install \
+    && cd .. \
+    && cd eProsima_FastRTPS-1.5.0-Linux; ./configure --libdir=/usr/lib; make -j$cpucores; make install \
+    && cd .. \
+    && rm -rf requiredcomponents eprosima_fastrtps-1-5-0-linux.tar.gz 
 
-RUN cd Firmware \
-  && git checkout v1.8.1 \
+# get px4, TODO: use ascends private px4 instead
+ENV PX4_DIR /home/user/Firmware
+RUN git clone https://github.com/PX4/Firmware.git $PX4_DIR
+
+WORKDIR $PX4_DIR
+RUN git checkout v1.8.1 \
   && /bin/bash -c "DONT_RUN=1 make posix_sitl_default"
 
-
-
+CMD ["./Tools/sitl_run.sh", \
+  "ROMFS/px4_common/init.d/10016_3dr_iris", \
+  "ROMFS/px4_common/init.d", \
+  "none", \
+  "none", \ 
+  "iris", \
+  ".", \
+  "./build/posix_sitl_default"]
