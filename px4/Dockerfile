@@ -39,11 +39,14 @@ WORKDIR $PX4_DIR
 RUN git checkout v1.8.1 \
   && /bin/bash -c "DONT_RUN=1 make posix_sitl_default"
 
-CMD ["./Tools/sitl_run.sh", \
-  "ROMFS/px4_common/init.d/10016_3dr_iris", \
-  "ROMFS/px4_common/init.d", \
-  "none", \
-  "none", \ 
-  "iris", \
-  ".", \
-  "./build/posix_sitl_default"]
+
+CMD ["./build/posix_sitl_default/px4", ".", "./posix-configs/SITL/init/ekf2/iris"]
+
+#CMD ["./Tools/sitl_run.sh", \
+#  "./build/posix_sitl_default/px4", \
+#  "ROMFS/px4_common/init.d", \
+#  "none", \
+#  "none", \ 
+#  "iris", \
+#  ".", \
+#  "./build/posix_sitl_default"]
