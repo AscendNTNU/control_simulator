@@ -39,7 +39,6 @@ RUN /bin/bash -c "source /usr/share/gazebo/setup.sh" \
 
 # setup environemt
 EXPOSE 8080
-EXPOSE 11345
-
+ENV GAZEBO_MASTER_URI http://localhost:11345
 CMD ["/bin/bash", "-c", "npm start"]
 
