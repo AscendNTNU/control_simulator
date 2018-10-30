@@ -31,15 +31,18 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x >> setup_8.sh \
   && apt-get install -y nodejs \
   && rm -rf /var/lib/apt/lists/*
 
+# get local models
+WORKDIR $GZWEB_WS
+ARG GZRESOURCES_DIR
+COPY $GZRESOURCES_DIR/models http/client/assets
 
 # build gzweb
-WORKDIR $GZWEB_WS
-RUN /bin/bash -c "source /usr/share/gazebo/setup.sh" \
+RUN /bin/bash -c "source /usr/share/gazebo/setup.sh \
   && hg up gzweb_1.4.0 \
-  && npm run deploy --- -m local
+  && npm run deploy --- -m local"
 
 # setup environemt
-# TODO: set GAZEBO_MASTER_URI at runtime
-CMD ["/bin/bash", "-c", "export GAZEBO_MASTER_URI=http://gzserver:11345 \
+ENV GAZEBO_MASTER_URI http://localhost:11345
+CMD ["/bin/bash", "-c", "export GAZEBO_MASTER_URI=${GAZEBO_MASTER_URI} \
   && npm start"]
 
