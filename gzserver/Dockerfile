@@ -17,7 +17,9 @@ RUN apt-get update && apt-get install -q -y \
   && rm -rf /var/lib/apt/lists/*
 
 # setup environemt
-COPY . .
+ARG GZRESOURCES_DIR
+WORKDIR /home/user/gzserver
+COPY $GZRESOURCES_DIR .
 
-CMD ["gzserver", "--verbose", "testing.world"]
+CMD ["gzserver", "--verbose", "worlds/testing.world"]
 

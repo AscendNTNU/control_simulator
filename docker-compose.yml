@@ -1,10 +1,18 @@
 version: '3'
 services:
   gzweb:
-    build: ./gzweb
+    build: 
+      context: .
+      dockerfile: gzweb/Dockerfile
+      args: 
+        - GZRESOURCES_DIR=./gzresources
     ports: 
       - "8080:8080"
   gzserver:
-    build: ./gzserver
+    build: 
+      context: .
+      dockerfile: gzserver/Dockerfile
+      args: 
+        - GZRESOURCES_DIR=./gzresources
     ports: 
       - "11345:11345"
