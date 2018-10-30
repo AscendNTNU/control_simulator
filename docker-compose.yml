@@ -1,13 +1,15 @@
 version: '3'
 services:
-  gzweb:
-    build: 
-      context: .
-      dockerfile: gzweb/Dockerfile
-      args: 
-        - GZRESOURCES_DIR=./gzresources
-    ports: 
-      - "8080:8080"
+  #gzweb:
+  #  build: 
+  #    context: .
+  #    dockerfile: gzweb/Dockerfile
+  #    args: 
+  #      - GZRESOURCES_DIR=./gzresources
+  #  ports: 
+  #    - "8080:8080"
+  #  environment:
+  #    - GAZEBO_MASTER_URI=http://gzserver:11345
   gzserver:
     build: 
       context: .
@@ -16,3 +18,5 @@ services:
         - GZRESOURCES_DIR=./gzresources
     ports: 
       - "11345:11345"
+    environment:
+      - WORLD_FILE=iris.world

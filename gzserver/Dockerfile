@@ -21,5 +21,12 @@ ARG GZRESOURCES_DIR
 WORKDIR /home/user/gzserver
 COPY $GZRESOURCES_DIR .
 
-CMD ["gzserver", "--verbose", "worlds/testing.world"]
+ENV WORLD_FILE testing.world
+CMD ["/bin/bash", "-c", "\
+  GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/user/gzserver/models \
+  && GAZEBO_PLUGIN_PATH=$GAZEBO_PLUGIN_PATH:/home/user/gzserver/plugins \
+  && LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/user/gzserver/plugins \
+  && echo $GAZEBO_MODEL_PATH \
+  && gzserver --verbose worlds/${WORLD_FILE}\
+  "]
 
