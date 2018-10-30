@@ -27,6 +27,6 @@ CMD ["/bin/bash", "-c", "\
   && GAZEBO_PLUGIN_PATH=$GAZEBO_PLUGIN_PATH:/home/user/gzserver/plugins \
   && LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/user/gzserver/plugins \
   && echo $GAZEBO_MODEL_PATH \
-  && gzserver --verbose worlds/${WORLD_FILE}\
+  && gzserver --pause --verbose worlds/${WORLD_FILE}\
   "]
 
