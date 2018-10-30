@@ -1,6 +1,7 @@
 FROM gazebo:libgazebo7
 MAINTAINER "rendellc@ascendntnu.no"
 
+
 # install dependencies
 ENV GZWEB_WS /root/gzweb
 ENV SCRIPT_DIR /root/scripts
@@ -38,7 +39,7 @@ RUN /bin/bash -c "source /usr/share/gazebo/setup.sh" \
   && npm run deploy --- -m local
 
 # setup environemt
-EXPOSE 8080
-ENV GAZEBO_MASTER_URI http://localhost:11345
-CMD ["/bin/bash", "-c", "npm start"]
+# TODO: set GAZEBO_MASTER_URI at runtime
+CMD ["/bin/bash", "-c", "export GAZEBO_MASTER_URI=http://gzserver:11345 \
+  && npm start"]
 

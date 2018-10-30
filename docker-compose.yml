@@ -4,12 +4,7 @@ services:
     build: ./gzweb
     ports: 
       - "8080:8080"
-    environment:
-      - GAZEBO_MASTER_URI=http://gzserver:11345
   gzserver:
     build: ./gzserver
-    ports:
+    ports: 
       - "11345:11345"
-
-
-
