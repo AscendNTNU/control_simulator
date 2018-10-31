@@ -1,28 +1,36 @@
 version: '3'
 services:
-  gzweb:
-    build: 
-      context: .
-      dockerfile: gzweb/Dockerfile
-      args: 
-        - GZRESOURCES_DIR=./gzresources
-    ports: 
-      - "8080:8080"
-    environment:
-      - GAZEBO_MASTER_URI=http://gzserver:11345
-    #logging:
-    #  driver: none
-  gzserver:
-    build: 
-      context: .
-      dockerfile: gzserver/Dockerfile
-      args: 
-        - GZRESOURCES_DIR=./gzresources
+  onboard_computer:
+    build: ./onboard_computer
     volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-    ports: 
-      - "11345:11345"
+      #- <host catkin_ws>:/home/user/catkin_ws:ro
+      - $HOME/catkin_ws:/home/user/catkin_ws:ro
     environment:
-      - WORLD_FILE=iris.world
+      - LAUNCH_PKG=test_pkg
+      - LAUNCH_FILE=test_launchfile.launch
+    #gzweb:
+    #gzbuild: 
+    #gz  context: .
+    #gz  dockerfile: gzweb/Dockerfile
+    #gz  args: 
+    #gz    - GZRESOURCES_DIR=./gzresources
+    #gzports: 
+    #gz  - "8080:8080"
+    #gzenvironment:
+    #gz  - GAZEBO_MASTER_URI=http://gzserver:11345
+    #gz#logging:
+    #gz#  driver: none
+    #gz#gzserver:
+    #gzbuild: 
+    #gz  context: .
+    #gz  dockerfile: gzserver/Dockerfile
+    #gz  args: 
+    #gz    - GZRESOURCES_DIR=./gzresources
+    #gzvolumes:
+    #gz  - /tmp/.X11-unix:/tmp/.X11-unix
+    #gzports: 
+    #gz  - "11345:11345"
+    #gzenvironment:
+    #gz  - WORLD_FILE=iris.world
   #px4:
   #  build: ./px4
