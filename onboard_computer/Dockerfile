@@ -1,7 +1,9 @@
 FROM ros:kinetic
 MAINTAINER "rendellc@ascendntnu.no"
 
-CMD ["/bin/bash", "-c",\
-  "source /home/user/catkin_ws/devel/setup.bash; \
-  roslaunch ${LAUNCH_PKG} ${LAUNCH_FILE}"]
+WORKDIR /catkin_ws
+COPY ./catkin_ws/src ./src
+RUN ["/bin/bash", "-c", "source /opt/ros/kinetic/setup.bash && catkin_make"]
+
+CMD ["/bin/bash", "-c", "source devel/setup.bash && ls && roslaunch ${LAUNCH_PKG} ${LAUNCH_FILE}"]
 

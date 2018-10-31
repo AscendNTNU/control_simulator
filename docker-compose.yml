@@ -1,13 +1,12 @@
 version: '3'
 services:
   onboard_computer:
-    build: ./onboard_computer
-    volumes:
-      #- <host catkin_ws>:/home/user/catkin_ws:ro
-      - $HOME/catkin_ws:/home/user/catkin_ws:ro
+    build: 
+      context: .
+      dockerfile: onboard_computer/Dockerfile
     environment:
       - LAUNCH_PKG=test_pkg
-      - LAUNCH_FILE=test_launchfile.launch
+      - LAUNCH_FILE=test.launch
     #gzweb:
     #gzbuild: 
     #gz  context: .
