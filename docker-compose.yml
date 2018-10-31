@@ -23,6 +23,6 @@ services:
     ports: 
       - "11345:11345"
     environment:
-      - WORLD_FILE=testing.world
+      - WORLD_FILE=iris.world
   #px4:
   #  build: ./px4
