@@ -40,6 +40,7 @@ RUN git checkout v1.8.1 \
   && /bin/bash -c "DONT_RUN=1 make posix_sitl_default"
 
 
+EXPOSE 14560
 CMD ["./build/posix_sitl_default/px4", ".", "./posix-configs/SITL/init/ekf2/iris"]
 
 #CMD ["./Tools/sitl_run.sh", \
