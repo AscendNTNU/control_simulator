@@ -1,7 +1,9 @@
 pipeline {
   agent { 
-    dockerfile 'computer/Dockerfile'
-    additionalBuildArgs '--build-arg DONT_BUILD=true'
+    dockerfile {
+      filename 'computer/Dockerfile'
+      additionalBuildArgs '--build-arg DONT_BUILD=true'
+    }
   }
   stages {
     stage('build') {
