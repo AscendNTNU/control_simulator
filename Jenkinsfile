@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'docker --version'
+        cd catkin_ws
+        catkin_make
       }
     }
   }
