@@ -2,8 +2,8 @@ pipeline {
   agent { docker { image 'ros:kinetic-ros-base'} }
   stages {
     stage('build') {
-      dir ('catkin_ws') {
-        steps {
+      steps {
+        dir ('catkin_ws') {
           sh 'catkin_make'
         }
       }
