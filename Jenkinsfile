@@ -1,5 +1,5 @@
 pipeline {
-  agent { docker { image 'ros:kinetic-ros-base'} }
+  agent { docker { image 'ros:kinetic'} }
   stages {
     stage('build') {
       steps {
