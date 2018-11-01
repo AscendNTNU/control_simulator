@@ -4,7 +4,7 @@ pipeline {
     stage('build') {
       steps {
         dir ('catkin_ws') {
-          sh 'catkin_make'
+          sh 'source /opt/ros/kinetic/setup.sh && catkin_make'
         }
       }
     }
