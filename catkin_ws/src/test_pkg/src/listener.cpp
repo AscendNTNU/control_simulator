@@ -4,7 +4,7 @@
 
 
 void callback(std_msgs::String::ConstPtr msg_p) {
-  ROS_INFO("got msg: %s", msg_p->data.c_str());
+  std::cout << "got msg: " << msg_p->data << std::endl;
 }
 
 int main(int argc, char** argv) {
