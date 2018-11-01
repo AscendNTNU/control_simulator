@@ -19,6 +19,7 @@ int main(int argc, char** argv) {
   }
 
 
+  ROS_INFO("No more messages to publish");
   return 0;
 }
 

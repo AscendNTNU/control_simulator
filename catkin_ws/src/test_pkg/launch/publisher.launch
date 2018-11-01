@@ -1,0 +1,3 @@
+<launch>
+  <node name="talker" pkg="test_pkg" type="test_pkg_publisher" output="screen"/>
+</launch>

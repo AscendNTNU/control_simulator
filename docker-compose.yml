@@ -1,10 +1,11 @@
 version: '3'
 services:
-  onboard_computer:
+  offboard_computer:
     build: 
       context: .
-      dockerfile: onboard_computer/Dockerfile
+      dockerfile: offboard_computer/Dockerfile
     environment:
+      - ROS_MASTER_URI=http://localhost:11311
       - LAUNCH_PKG=test_pkg
       - LAUNCH_FILE=test.launch
     #gzweb:
