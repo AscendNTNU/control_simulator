@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        cd catkin_ws
+        sh 'cd catkin_ws'
         sh 'catkin_make'
       }
     }
