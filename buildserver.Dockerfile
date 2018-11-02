@@ -3,6 +3,7 @@ MAINTAINER "rendellc@ascendntnu.no"
 
 RUN apt-get update \
   && apt-get install -y \
+  gazebo7 \
   libeigen3-dev \
   libgazebo7-dev \
   libopencv-dev \
