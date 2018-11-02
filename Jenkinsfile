@@ -2,6 +2,7 @@ pipeline {
   agent { 
     dockerfile {
       filename 'buildserver.Dockerfile'
+      args '--entrypoint=""'
     }
   }
   stages {
