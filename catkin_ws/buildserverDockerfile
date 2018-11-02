@@ -1,0 +1,27 @@
+FROM ros:kinetic
+MAINTAINER "rendellc@ascendntnu.no"
+
+
+RUN apt-get update \
+  && apt-get install -y \
+  ros-kinetic-mavros \
+  ros-kinetic-mavros-msgs \
+  ros-kinetic-mavros-extras 
+
+# sitl gazebo dependencies
+RUN libeigen3-dev \
+  libgazebo7-dev \
+  libopencv-dev \
+  libprotobuf-dev \
+  libprotoc-dev \
+  libxml2-utils \
+  protobuf-compiler \
+  python-jinja2 \
+  python-rospkg 
+
+WORKDIR /home/user/gzserver
+COPY src src
+RUN . /opt/ros/kinetic/setup.sh
+
+CMD catkin_make
+
