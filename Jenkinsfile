@@ -10,7 +10,6 @@ pipeline {
       steps {
         dir ('catkin_ws') {
           sh 'whoami'
-          #sh '. /opt/ros/kinetic/setup.sh && catkin_make'
         }
       }
     }
