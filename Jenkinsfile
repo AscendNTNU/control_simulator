@@ -9,7 +9,7 @@ pipeline {
     stage('build') {
       steps {
         dir ('catkin_ws') {
-          sh 'ls'
+          sh '. /opt/ros/kinetic/setup.sh'
           sh 'catkin_make'
         }
       }
