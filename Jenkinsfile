@@ -1,7 +1,7 @@
 pipeline {
   agent { 
     dockerfile {
-      filename 'catkin_ws/buildserverDockerfile'
+      filename 'buildserver.Dockerfile'
     }
   }
   stages {
