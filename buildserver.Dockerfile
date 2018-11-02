@@ -20,3 +20,4 @@ RUN apt-get update \
 
 RUN . /opt/ros/kinetic/setup.sh
 
+CMD bash
