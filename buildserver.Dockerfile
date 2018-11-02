@@ -5,12 +5,14 @@ RUN apt-get update \
   && apt-get install -y \
   libeigen3-dev \
   libgazebo7-dev \
+  libopencv-dev \
   libprotobuf-dev \
   libprotoc-dev \
   libxml2-utils \
   protobuf-compiler \
   python-rospkg \
   python-jinja2 \
+  ros-kinetic-cv-bridge \
   ros-kinetic-mavros \
   ros-kinetic-mavros-msgs \
   ros-kinetic-mavros-extras \
