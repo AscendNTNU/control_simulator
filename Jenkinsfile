@@ -12,6 +12,7 @@ pipeline {
           sh 'echo Going into catkin_ws'
           sh 'ls'
           sh 'echo Starting to build catkin_ws'
+          sh '. /opt/ros/kinetic/setup.sh'
           sh 'catkin_make'
         }
       }
