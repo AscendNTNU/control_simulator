@@ -11,8 +11,6 @@ pipeline {
         dir ('catkin_ws') {
           sh '. /opt/ros/kinetic/setup.sh && catkin_make'
         }
-      }
-      steps {
         dir('gzresources/sitl_gazebo') {
           sh 'mkdir build'
           dir ('build') {
