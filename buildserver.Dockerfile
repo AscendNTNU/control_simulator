@@ -21,5 +21,3 @@ WORKDIR /catkin_ws
 COPY ./catkin_ws/src ./src
 RUN . /opt/ros/kinetic/setup.sh
 
-CMD catkin_make
-
