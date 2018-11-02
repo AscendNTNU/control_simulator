@@ -10,7 +10,7 @@ pipeline {
       steps {
         dir ('catkin_ws') {
           sh 'ls'
-          sh 'echo "$(which catkin_make)"'
+          sh 'catkin_make'
         }
       }
     }
