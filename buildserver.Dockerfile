@@ -18,8 +18,5 @@ RUN apt-get update \
   ros-kinetic-mavros-extras \
   && rm -rf /var/lib/apt/lists/*
 
-
-WORKDIR /catkin_ws
-COPY ./catkin_ws/src ./src
 RUN . /opt/ros/kinetic/setup.sh
 
