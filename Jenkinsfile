@@ -9,7 +9,8 @@ pipeline {
     stage('build') {
       steps {
         dir ('catkin_ws') {
-          sh 'whoami'
+          sh 'ls'
+          sh 'echo $(which catkin_make)'
         }
       }
     }
