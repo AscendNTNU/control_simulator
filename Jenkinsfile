@@ -1,8 +1,7 @@
 pipeline {
   agent { 
     dockerfile {
-      filename 'computer/Dockerfile'
-      additionalBuildArgs '--build-arg DONT_BUILD=true'
+      filename 'catkin_ws/buildserverDockerfile'
     }
   }
   stages {
