@@ -6,6 +6,11 @@ pipeline {
     }
   }
   stages {
+    stage('pre build') {
+      steps {
+        sh 'git submodule update --update --init'
+      }
+    }
     stage('build') {
       steps {
         dir ('catkin_ws') {
