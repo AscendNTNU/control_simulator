@@ -1,3 +1,0 @@
-[submodule "gzresources/sitl_gazebo"]
-  path = gzresources/sitl_gazebo
-  url = https://github.com/AscendNTNU/sitl_gazebo.git
