@@ -8,39 +8,39 @@ services:
   #  environment:
   #    - LAUNCH_PKG=test_pkg
   #    - LAUNCH_FILE=publisher.launch
-  onboard_computer:
-    build: 
-      context: .
-      dockerfile: computer/Dockerfile
-    environment:
-      #- ROS_MASTER_URI=http://offboard_computer:11311
-      - LAUNCH_PKG=test_pkg
-      - LAUNCH_FILE=listener.launch
-        #depends_on:
-      #- offboard_computer
-        #gzweb:
-        #  build: 
-        #    context: .
-        #    dockerfile: gzweb/Dockerfile
-        #    args: 
-        #      - GZRESOURCES_DIR=./gzresources
-        #  ports: 
-        #    - "8080:8080"
-        #  environment:
-        #    - GAZEBO_MASTER_URI=http://gzserver:11345
-        #  logging:
-        #    driver: none
-  gzserver:
-    build: 
-      context: .
-      dockerfile: gzserver/Dockerfile
-      args: 
-        - GZRESOURCES_DIR=./gzresources
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-        #ports: 
-        #  - "11345:11345"
-    environment:
-      - WORLD_FILE=iris.world
+  #onboard_computer:
+  #  build: 
+  #    context: .
+  #    dockerfile: computer/Dockerfile
+  #  environment:
+  #    #- ROS_MASTER_URI=http://offboard_computer:11311
+  #    - LAUNCH_PKG=test_pkg
+  #    - LAUNCH_FILE=listener.launch
+  #      #depends_on:
+  #    #- offboard_computer
+  #      #gzweb:
+  #      #  build: 
+  #      #    context: .
+  #      #    dockerfile: gzweb/Dockerfile
+  #      #    args: 
+  #      #      - GZRESOURCES_DIR=./gzresources
+  #      #  ports: 
+  #      #    - "8080:8080"
+  #      #  environment:
+  #      #    - GAZEBO_MASTER_URI=http://gzserver:11345
+  #      #  logging:
+  #      #    driver: none
+  #gzserver:
+  #  build: 
+  #    context: .
+  #    dockerfile: gzserver/Dockerfile
+  #    args: 
+  #      - GZRESOURCES_DIR=./gzresources
+  #  volumes:
+  #    - /tmp/.X11-unix:/tmp/.X11-unix
+  #      #ports: 
+  #      #  - "11345:11345"
+  #  environment:
+  #    - WORLD_FILE=iris.world
   px4:
     build: ./px4
