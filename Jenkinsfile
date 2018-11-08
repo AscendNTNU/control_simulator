@@ -10,7 +10,6 @@ pipeline {
     stage('pre-build') {
       steps {
         sh 'git submodule update --init'
-
       }
     }
     stage('build') {
@@ -25,6 +24,10 @@ pipeline {
   }
   post {
     cleanup {
+      sh 'ls'
+      sh 'ls catkin_ws'
+      sh 'ls gzresources'
+
       cleanWs()
       sh 'rm -f gzresources/sitl_gazebo/models/iris/iris.sdf'
     }
