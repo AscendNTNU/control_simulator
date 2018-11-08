@@ -21,7 +21,7 @@ RUN apt-get update \
 
 RUN . /opt/ros/kinetic/setup.sh \
   && mkdir /.gazebo \
-  && chowm jenkins /.gazebo
+  && chown jenkins /.gazebo
 
 WORKDIR /home/user
 
