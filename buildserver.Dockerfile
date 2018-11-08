@@ -19,7 +19,8 @@ RUN apt-get update \
   ros-kinetic-mavros-extras \
   && rm -rf /var/lib/apt/lists/*
 
-RUN . /opt/ros/kinetic/setup.sh
+RUN . /opt/ros/kinetic/setup.sh \
+  && mkdir /.gazebo
 
 WORKDIR /home/user
 
