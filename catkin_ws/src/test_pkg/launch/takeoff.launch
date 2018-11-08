@@ -1,0 +1,3 @@
+<launch>
+  <node name="takeoffnode" pkg="test_pkg" type="test_pkg_takeoff" output="screen"/>
+</launch>

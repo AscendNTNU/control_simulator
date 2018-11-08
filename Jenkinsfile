@@ -1,7 +1,7 @@
 pipeline {
   agent { 
     dockerfile {
-      filename 'buildserver.Dockerfile'
+      filename 'dockerfiles/jenkins.dockerfile'
       args '--entrypoint="" --user=root'
     }
   }
