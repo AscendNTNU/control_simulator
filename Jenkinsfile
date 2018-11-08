@@ -18,7 +18,13 @@ pipeline {
             sh 'make'
           }
         }
+
       }
+    }
+  }
+  post {
+    always {
+      cleanWs()
     }
   }
 }
