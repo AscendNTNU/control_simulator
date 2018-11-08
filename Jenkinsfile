@@ -2,8 +2,8 @@ pipeline {
   agent { 
     dockerfile {
       filename 'dockerfiles/jenkins.dockerfile'
-      label 'control_simulator'
       args '--entrypoint=""'
+      additionalBuildArgs '-t control_simulator_jenkins'
     }
   }
   stages {
