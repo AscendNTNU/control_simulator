@@ -31,6 +31,7 @@ pipeline {
   post {
     always {
       cleanWs()
+      sh 'rm -f gzresources/sitl_gazebo/models/iris/iris.sdf'
     }
   }
 }
