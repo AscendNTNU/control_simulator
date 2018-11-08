@@ -13,6 +13,7 @@ pipeline {
         }
         dir('gzresources/sitl_gazebo') {
           sh 'mkdir build'
+          sh 'ls'
           dir ('build') {
             sh 'cmake ..'
             sh 'make'
