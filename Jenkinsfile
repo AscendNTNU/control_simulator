@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('pre-build') {
       steps {
-        sh 'git submodule update --recursive --init'
+        sh 'git submodule update --init'
 
       }
     }
