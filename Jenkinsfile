@@ -18,7 +18,7 @@ pipeline {
         }
         dir('gzresources/sitl_gazebo') {
           sh 'mkdir build'
-          sh 'ls'
+          sh 'whoami'
           dir ('build') {
             sh 'cmake ..'
             sh 'make'

@@ -20,7 +20,8 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 RUN . /opt/ros/kinetic/setup.sh \
-  && mkdir /.gazebo
+  && mkdir /.gazebo \
+  && chowm jenkins /.gazebo
 
 WORKDIR /home/user
 
