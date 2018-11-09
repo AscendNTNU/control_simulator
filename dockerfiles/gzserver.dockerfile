@@ -29,5 +29,5 @@ ENV WORLD_FILE testing.world
 CMD ["/bin/bash", "-c", "\
   Xvfb :1 -screen 0 1280x720x16 & \
   export DISPLAY=:1.0 \ 
-  && gzserver --pause --verbose worlds/${WORLD_FILE}"]
+  && gzserver --verbose worlds/${WORLD_FILE}"]
 

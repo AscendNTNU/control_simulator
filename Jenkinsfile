@@ -1,17 +1,34 @@
 pipeline {
   agent { 
     dockerfile {
-      filename 'computer/Dockerfile'
-      additionalBuildArgs '--build-arg DONT_BUILD=true'
+      filename 'dockerfiles/jenkins.dockerfile'
+      args '--entrypoint=""'
+      additionalBuildArgs '-t control_simulator_jenkins'
     }
   }
   stages {
+    stage('pre-build') {
+      steps {
+        sh 'git submodule update --init'
+      }
+    }
     stage('build') {
       steps {
         dir ('catkin_ws') {
           sh '. /opt/ros/kinetic/setup.sh && catkin_make'
         }
+
+        sh './build_plugins.sh'
       }
+    }
+  }
+  post {
+    cleanup {
+      sh 'ls'
+      sh 'ls catkin_ws'
+      sh 'ls gzresources'
+
+      cleanWs()
     }
   }
 }

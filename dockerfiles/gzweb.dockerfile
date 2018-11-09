@@ -42,5 +42,5 @@ RUN /bin/bash -c "source /usr/share/gazebo/setup.sh \
   && npm run deploy --- -m local"
 
 # setup environemt
-CMD [npm, start]
+CMD npm start
 
