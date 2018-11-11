@@ -42,6 +42,8 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
     environment:
       - WORLD_FILE=iris.world
+    logging: 
+      driver: "none"
   px4:
     build: 
       context: .

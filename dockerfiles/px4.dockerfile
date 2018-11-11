@@ -38,13 +38,13 @@ RUN git clone -b ascend-v1.8.1 https://github.com/AscendNTNU/Ascend-PX4.git $PX4
 WORKDIR $PX4_DIR
 RUN DONT_RUN=1 make posix_sitl_default
 
-CMD ["./build/posix_sitl_default/px4", ".", "./posix-configs/SITL/init/ekf2/ascend"]
+CMD ["/bin/bash", "-c", "./build/posix_sitl_default/px4 . ./posix-configs/SITL/init/ekf2/ascend"]
 
 #CMD ["./Tools/sitl_run.sh", \
 #  "./build/posix_sitl_default/px4", \
-#  "ROMFS/px4_common/init.d", \
+#  "posix-configs/SITL/init/ekf2", \
 #  "none", \
 #  "none", \ 
-#  "iris", \
+#  "ascend", \
 #  ".", \
 #  "./build/posix_sitl_default"]
