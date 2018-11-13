@@ -1,37 +1,38 @@
 version: '3'
 services:
-  #offboard_computer:
-  #  build: 
-  #    context: .
-  #    dockerfile: dockerfiles/computer.dockerfile
-  #  command: roscore
-  #  environment:
-  #    - LAUNCH_PKG=test_pkg
-  #    - LAUNCH_FILE=publisher.launch
-  #  ports:
-  #    - "11311:11311" # expose rosmaster to outside
-  #onboard_computer:
-  #  build: 
-  #    context: .
-  #    dockerfile: dockerfiles/computer.dockerfile
-  #  environment:
-  #    #- ROS_MASTER_URI=http://offboard_computer:11311
-  #    - LAUNCH_PKG=test_pkg
-  #    - LAUNCH_FILE=listener.launch
-  #  #depends_on:
-  #  #  - offboard_computer
-  #gzweb:
-  #  build: 
-  #    context: .
-  #    dockerfile: dockerfiles/gzweb.dockerfile
-  #    args: 
-  #      - GZRESOURCES_DIR=./gzresources
-  #  ports: 
-  #    - "8080:8080"
-  #  environment:
-  #    - GAZEBO_MASTER_URI=http://gzserver:11345
-  #  depends_on:
-  #    - gzserver
+  offboard_computer:
+    build: 
+      context: .
+      dockerfile: dockerfiles/computer.dockerfile
+    command: roscore
+    environment:
+      - LAUNCH_PKG=test_pkg
+      - LAUNCH_FILE=publisher.launch
+    ports:
+      - "11311:11311" # expose rosmaster to outside
+  onboard_computer:
+    build: 
+      context: .
+      dockerfile: dockerfiles/computer.dockerfile
+    environment:
+      - ROS_MASTER_URI=http://offboard_computer:11311
+      - LAUNCH_PKG=test_pkg
+      - LAUNCH_FILE=listener.launch
+    command: rostopic list
+    depends_on:
+      - offboard_computer
+  gzweb:
+    build: 
+      context: .
+      dockerfile: dockerfiles/gzweb.dockerfile
+      args: 
+        - GZRESOURCES_DIR=./gzresources
+    ports: 
+      - "8080:8080"
+    environment:
+      - GAZEBO_MASTER_URI=http://gzserver:11345
+    depends_on:
+      - gzserver
   gzserver:
     build: 
       context: .
@@ -46,3 +47,4 @@ services:
     build: 
       context: .
       dockerfile: dockerfiles/px4.dockerfile
+    tty: true
