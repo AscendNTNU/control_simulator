@@ -3,7 +3,7 @@ services:
   offboard_computer:
     build: 
       context: .
-      dockerfile: dockerfiles/computer.dockerfile
+      dockerfile: components/computer.dockerfile
     command: roscore
     environment:
       - LAUNCH_PKG=test_pkg
@@ -13,7 +13,7 @@ services:
   onboard_computer:
     build: 
       context: .
-      dockerfile: dockerfiles/computer.dockerfile
+      dockerfile: components/computer.dockerfile
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
       - LAUNCH_PKG=test_pkg
@@ -24,19 +24,19 @@ services:
   gzweb:
     build: 
       context: .
-      dockerfile: dockerfiles/gzweb.dockerfile
+      dockerfile: components/gzweb.dockerfile
       args: 
         - GZRESOURCES_DIR=./gzresources
     ports: 
       - "8080:8080"
     environment:
-      - GAZEBO_MASTER_URI=http://gzserver:11345 # has no effect
+      - GAZEBO_MASTER_URI=http://gzserver:11345 
     depends_on:
       - gzserver
   gzserver:
     build: 
       context: .
-      dockerfile: dockerfiles/gzserver.dockerfile
+      dockerfile: components/gzserver.dockerfile
       args: 
         - GZRESOURCES_DIR=./gzresources
     volumes:
@@ -46,5 +46,5 @@ services:
   px4:
     build: 
       context: .
-      dockerfile: dockerfiles/px4.dockerfile
+      dockerfile: components/px4.dockerfile
     tty: true
