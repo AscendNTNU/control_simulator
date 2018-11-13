@@ -27,7 +27,8 @@ ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/home/user/gzserver/plugins
 
 ENV WORLD_FILE testing.world
 CMD ["/bin/bash", "-c", "\
-  Xvfb :1 -screen 0 1280x720x16 & \
+  set +e \
+  && Xvfb :1 -screen 0 1280x720x16 & \
   export DISPLAY=:1.0 \ 
   && gzserver --verbose worlds/${WORLD_FILE}"]
 

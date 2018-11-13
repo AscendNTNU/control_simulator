@@ -20,18 +20,18 @@ services:
   #    - LAUNCH_FILE=listener.launch
   #  #depends_on:
   #  #  - offboard_computer
-  #gzweb:
-  #  build: 
-  #    context: .
-  #    dockerfile: dockerfiles/gzweb.dockerfile
-  #    args: 
-  #      - GZRESOURCES_DIR=./gzresources
-  #  ports: 
-  #    - "8080:8080"
-  #  environment:
-  #    - GAZEBO_MASTER_URI=http://gzserver:11345
-  #  depends_on:
-  #    - gzserver
+  gzweb:
+    build: 
+      context: .
+      dockerfile: dockerfiles/gzweb.dockerfile
+      args: 
+        - GZRESOURCES_DIR=./gzresources
+    ports: 
+      - "8080:8080"
+    environment:
+      - GAZEBO_MASTER_URI=http://gzserver:11345 # has no effect
+    depends_on:
+      - gzserver
   gzserver:
     build: 
       context: .
@@ -42,9 +42,8 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
     environment:
       - WORLD_FILE=iris.world
-    logging: 
-      driver: "none"
   px4:
     build: 
       context: .
       dockerfile: dockerfiles/px4.dockerfile
+    tty: true

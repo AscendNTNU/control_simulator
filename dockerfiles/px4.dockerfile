@@ -39,7 +39,7 @@ WORKDIR $PX4_DIR
 RUN DONT_RUN=1 make posix_sitl_default 
 
 
-CMD ["/bin/bash", "-c", "./build/posix_sitl_default/px4 -d . posix-configs/SITL/init/ekf2/ascend & sleep inf"]
+CMD /bin/bash -c "set +e && ./build/posix_sitl_default/px4 -d . posix-configs/SITL/init/ekf2/ascend"
 
 #CMD ["./Tools/sitl_run.sh", \
 #  "./build/posix_sitl_default/px4", \
