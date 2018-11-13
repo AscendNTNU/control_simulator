@@ -42,5 +42,5 @@ RUN /bin/bash -c "source /usr/share/gazebo/setup.sh \
   && npm run deploy --- -m local"
 
 # setup environemt
-CMD npm start
+CMD GAZEBO_MASTER_URI=http://gzserver:11345 npm start
 
