@@ -9,7 +9,7 @@ services:
       - LAUNCH_PKG=test_pkg
       - LAUNCH_FILE=publisher.launch
     ports:
-      - "11311:11311" # expose rosmaster to outside
+      - "11311:11311" # expose rosmaster to outside for convenience
   onboard_computer:
     build: 
       context: .
@@ -30,7 +30,7 @@ services:
     ports: 
       - "8080:8080"
     environment:
-      - GAZEBO_MASTER_URI=http://gzserver:11345
+      - GAZEBO_MASTER_URI=http://gzserver:11345 # has no effect
     depends_on:
       - gzserver
   gzserver:
