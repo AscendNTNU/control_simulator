@@ -10,6 +10,7 @@ docker-compose up
 ```
 `docker-compose` creates an internal network and run the different nodes specified in `docker-compose.yml`. This means that the nodes in the simulator run separated from the host. The ros master node is exposed, so you can interact with the ros nodes as you would running locally. 
 
+If all goes well, then you can open a web browser and view the simulation at `http://localhost:8080`. 
 
 ## Project Structure
 
