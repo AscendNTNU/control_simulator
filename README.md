@@ -17,8 +17,8 @@ The catkin_ws folder is compiled and made available on the offboard computer and
 ### gzresources/
 
 ## Requirements
-- recent version of docker installed and running (![https://docs.docker.com/install/linux/docker-ce/ubuntu/](link))
-- recent version of docker-compose (![https://docs.docker.com/compose/install/](link))
+- recent version of docker installed and running (![link](https://docs.docker.com/install/linux/docker-ce/ubuntu/))
+- recent version of docker-compose (![link](https://docs.docker.com/compose/install/))
 
 ## Development
 
