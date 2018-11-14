@@ -1,13 +1,25 @@
-# control_simulator
-The goal of this simulator is to provide a simulation environment where we can test the fsm, path planning, obstacle avoidance, enemy drone interaction, and more. 
+# Control Simulator
+
+
+## Quickstart
+Make sure your computer fulfills the requirements below. 
+
+## Project Structure
+
+### Architecture
+
+### catkin_ws/
+The catkin_ws folder is compiled and made available on the offboard computer and all onboard computers. 
+
+
+### components/
+
+### gzresources/
 
 ## Requirements
-Need to have recent versions of docker and docker-compose installed. 
+- recent version of docker installed and running (![https://docs.docker.com/install/linux/docker-ce/ubuntu/](link))
+- recent version of docker-compose (![https://docs.docker.com/compose/install/](link))
 
-## Getting started
-`docker-compose up`
+## Development
 
-## Build gzserver/gzweb
-`docker build -t gzserver --build-arg GZRESOURCES_DIR=./gzresources -f gzserver/Dockerfile .`
-
-`docker build -t gzweb --build-arg GZRESOURCES_DIR=./gzresources -f gzweb/Dockerfile .`
+### Recompiling plugins for gazebo
