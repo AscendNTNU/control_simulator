@@ -15,8 +15,8 @@ services:
       context: .
       dockerfile: components/computer.dockerfile
     container_name: onboard_computer_1
-    #command: echo "node disabled from docker-compose.yml"
-    command: rostopic echo /gazebo/model_states
+    command: echo "node disabled from docker-compose.yml"
+    #command: rostopic echo /gazebo/model_states
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
       - LAUNCH_PKG=test_pkg
