@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
   ros::init(argc, argv, "obstacle_publisher");
   ros::NodeHandle n;
   ros::Publisher pub = n.advertise<geometry_msgs::PoseArray>("/ai/close_obstacles", 1);
-  ros::Subscriber sub = n.subscribe("/server/obstacles", 1, &sub_callback);
+  ros::Subscriber sub = n.subscribe("/gazebo/model_states", 1, &sub_callback);
 
 //ros::Timer pub_timer = n.createTimer(
 //     ros::Duration(1.f), 
