@@ -5,9 +5,8 @@ services:
       context: .
       dockerfile: components/computer.dockerfile
     container_name: offboard_computer
-    environment:
-      - LAUNCH_PKG=obstacle_publisher
-      - LAUNCH_FILE=obtacle_publisher.launch
+    #command: rostopic obstacle_publisher obtacle_publisher.launch
+    command: roscore
     ports:
       - "11311:11311" # expose rosmaster to host-computer
   onboard_computer:
@@ -15,12 +14,10 @@ services:
       context: .
       dockerfile: components/computer.dockerfile
     container_name: onboard_computer_1
-    command: echo "node disabled from docker-compose.yml"
-    #command: rostopic echo /gazebo/model_states
+    #command: echo \"node disabled from docker-compose.yml\"
+    command: roslaunch --wait test_pkg publisher.launch
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
-      - LAUNCH_PKG=test_pkg
-      - LAUNCH_FILE=listener.launch
     depends_on:
       - offboard_computer
   gzweb:
@@ -36,6 +33,8 @@ services:
       - GAZEBO_MASTER_URI=http://gzserver:11345 # has no effect
     depends_on:
       - gzserver
+    logging:
+      driver: none
   gzserver:
     build: 
       context: .
@@ -47,11 +46,18 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
-      - WORLD_FILE=iris_vs_static_obstacles.world
-  px4:
+      - WORLD_FILE=multiple_iris.world
+  px4_1:
     build: 
       context: .
       dockerfile: components/px4.dockerfile
     container_name: px4_1
     tty: true
-
+  px4_2:
+    build: 
+      context: .
+      dockerfile: components/px4.dockerfile
+    container_name: px4_2
+    tty: true
+    logging:
+      driver: none

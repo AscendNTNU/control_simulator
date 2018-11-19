@@ -46,5 +46,5 @@ CMD ["/bin/bash", "-c", "\
   && Xvfb :1 -screen 0 1280x720x16 & \
   export DISPLAY=:1.0 \ 
   && source /opt/ros/kinetic/setup.bash \
-  && rosrun gazebo_ros gzserver --verbose $PWD/worlds/${WORLD_FILE}"]
+  && rosrun gazebo_ros gzserver $PWD/worlds/${WORLD_FILE}"]
 
