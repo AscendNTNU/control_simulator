@@ -38,6 +38,8 @@ int main(int argc, char **argv)
         rate.sleep();
     }
 
+    ROS_INFO("FCU connection established");
+
     geometry_msgs::PoseStamped pose;
     pose.pose.position.x = 0;
     pose.pose.position.y = 0;

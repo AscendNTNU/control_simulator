@@ -9,13 +9,15 @@ services:
     command: roscore
     ports:
       - "11311:11311" # expose rosmaster to host-computer
+    logging:
+      driver: none
   onboard_computer:
     build: 
       context: .
       dockerfile: components/computer.dockerfile
     container_name: onboard_computer_1
     #command: echo \"node disabled from docker-compose.yml\"
-    command: roslaunch --wait test_pkg publisher.launch
+    command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_1
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
     depends_on:
@@ -47,6 +49,8 @@ services:
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
       - WORLD_FILE=multiple_iris.world
+    logging:
+      driver: none
   px4_1:
     build: 
       context: .
