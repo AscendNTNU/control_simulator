@@ -1,0 +1,21 @@
+<sdf version="1.6">
+  <model name="danger_sphere_obstacle">
+    <static>1</static>
+    <link name="base">
+      <collision name="collision">
+        <geometry>
+          <sphere>
+            <radius>0.3</radius>
+          </sphere>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <sphere>
+            <radius>0.3</radius>
+          </sphere>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>
