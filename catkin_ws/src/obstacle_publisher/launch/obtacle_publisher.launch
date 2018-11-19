@@ -1,0 +1,3 @@
+<launch>
+  <node name="obstacle_publisher" pkg="obstacle_publisher" type="obstacle_publisher_node"/>
+</launch>
