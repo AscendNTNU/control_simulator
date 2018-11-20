@@ -1,9 +1,10 @@
 <launch>
   <arg name="px4_addr"/>
+  <arg name="my_addr"/>
 
   <node name="takeoffnode" pkg="test_pkg" type="test_pkg_takeoff" output="screen"/>
 
   <include file="$(find mavros)/launch/px4.launch">
-    <arg name="fcu_url" value="udp://:14540@$(arg px4_addr):14557"/>
+    <arg name="fcu_url" value="udp://$(arg my_addr):14540@$(arg px4_addr):14557"/>
   </include>
 </launch>

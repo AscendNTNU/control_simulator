@@ -17,7 +17,7 @@ services:
       dockerfile: components/computer.dockerfile
     container_name: onboard_computer_1
     #command: echo \"node disabled from docker-compose.yml\"
-    command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_1
+    command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_1 my_addr:=onboard_computer_1
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
     depends_on:
@@ -49,8 +49,6 @@ services:
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
       - WORLD_FILE=multiple_iris.world
-    logging:
-      driver: none
   px4_1:
     build: 
       context: .
