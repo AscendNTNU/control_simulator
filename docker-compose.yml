@@ -11,13 +11,24 @@ services:
       - "11311:11311" # expose rosmaster to host-computer
     logging:
       driver: none
-  onboard_computer:
+  onboard_computer_1:
     build: 
       context: .
       dockerfile: components/computer.dockerfile
     container_name: onboard_computer_1
     #command: echo \"node disabled from docker-compose.yml\"
-    command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_1 
+    command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_1 nodename:=pc1
+    environment:
+      - ROS_MASTER_URI=http://offboard_computer:11311
+    depends_on:
+      - offboard_computer
+  onboard_computer_2:
+    build: 
+      context: .
+      dockerfile: components/computer.dockerfile
+    container_name: onboard_computer_2
+    #command: echo \"node disabled from docker-compose.yml\"
+    command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_2 nodename:=pc2
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
     depends_on:
@@ -61,5 +72,3 @@ services:
       dockerfile: components/px4.dockerfile
     container_name: px4_2
     tty: true
-    logging:
-      driver: none
