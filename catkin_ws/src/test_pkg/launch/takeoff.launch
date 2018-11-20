@@ -1,9 +1,11 @@
 <launch>
+  <arg name="nodename"/>
   <arg name="px4_addr"/>
 
-  <node name="takeoffnode" pkg="test_pkg" type="test_pkg_takeoff" output="screen"/>
-
-  <include file="$(find mavros)/launch/px4.launch">
-    <arg name="fcu_url" value="udp://$(env ROS_IP):14540@$(arg px4_addr):14557"/>
-  </include>
+  <group ns="$(arg nodename)">
+    <node name="takeoffnode" pkg="test_pkg" type="test_pkg_takeoff" output="screen"/>
+    <include file="$(find mavros)/launch/px4.launch">
+      <arg name="fcu_url" value="udp://$(env ROS_IP):14540@$(arg px4_addr):14557"/>
+    </include>
+  </group>
 </launch>
