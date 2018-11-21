@@ -10,7 +10,7 @@
       <uri>model://ground_plane</uri>
     </include>
     <include>
-      <uri>model://iris</uri>
+      <uri>model://iris_1</uri>
       <pose>1.01 0.98 0.83 0 0 1.14</pose>
     </include>
     <include>

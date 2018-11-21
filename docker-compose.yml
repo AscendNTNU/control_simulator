@@ -22,17 +22,17 @@ services:
       - ROS_MASTER_URI=http://offboard_computer:11311
     depends_on:
       - offboard_computer
-  onboard_computer_2:
-    build: 
-      context: .
-      dockerfile: components/computer.dockerfile
-    container_name: onboard_computer_2
-    #command: echo \"node disabled from docker-compose.yml\"
-    command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_2 nodename:=pc2
-    environment:
-      - ROS_MASTER_URI=http://offboard_computer:11311
-    depends_on:
-      - offboard_computer
+        #onboard_computer_2:
+        #  build: 
+        #    context: .
+        #    dockerfile: components/computer.dockerfile
+        #  container_name: onboard_computer_2
+        #  #command: echo \"node disabled from docker-compose.yml\"
+        #  command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_2 nodename:=pc2
+        #  environment:
+        #    - ROS_MASTER_URI=http://offboard_computer:11311
+        #  depends_on:
+        #    - offboard_computer
   gzweb:
     build: 
       context: .
@@ -59,16 +59,16 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
-      - WORLD_FILE=multiple_iris.world
+      - WORLD_FILE=iris_vs_static_obstacles.world
   px4_1:
     build: 
       context: .
       dockerfile: components/px4.dockerfile
     container_name: px4_1
     tty: true
-  px4_2:
-    build: 
-      context: .
-      dockerfile: components/px4.dockerfile
-    container_name: px4_2
-    tty: true
+    #px4_2:
+    #  build: 
+    #    context: .
+    #    dockerfile: components/px4.dockerfile
+    #  container_name: px4_2
+    #  tty: true
