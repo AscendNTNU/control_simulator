@@ -9,11 +9,13 @@ pipeline {
   stages {
     stage('fetch-submodules') {
       steps {
+        sh 'pwd'
         sh 'git submodule update --init --recursive'
       }
     }
     stage('compile-plugins') {
       steps {
+        sh 'pwd'
         dir ('gzresources') {
           sh 'mkdir -p build'
           dir ('build') {
