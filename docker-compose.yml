@@ -1,9 +1,7 @@
 version: '3'
 services:
   offboard_computer:
-    build: 
-      context: .
-      dockerfile: components/computer.dockerfile
+    image: ascendntnu/control_simulator_pc_node
     container_name: offboard_computer
     #command: rostopic obstacle_publisher obtacle_publisher.launch
     command: roscore
@@ -12,9 +10,7 @@ services:
     logging:
       driver: none
   onboard_computer_1:
-    build: 
-      context: .
-      dockerfile: components/computer.dockerfile
+    image: ascendntnu/control_simulator_pc_node
     container_name: onboard_computer_1
     #command: echo \"node disabled from docker-compose.yml\"
     command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_1 nodename:=pc1
@@ -23,9 +19,7 @@ services:
     depends_on:
       - offboard_computer
   onboard_computer_2:
-    build: 
-      context: .
-      dockerfile: components/computer.dockerfile
+    image: ascendntnu/control_simulator_pc_node
     container_name: onboard_computer_2
     #command: echo \"node disabled from docker-compose.yml\"
     command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_2 nodename:=pc2
@@ -34,11 +28,12 @@ services:
     depends_on:
       - offboard_computer
   gzweb:
-    build: 
-      context: .
-      dockerfile: components/gzweb.dockerfile
-      args: 
-        - GZRESOURCES_DIR=./gzresources
+    image: ascendntnu/gzweb
+    #build: 
+    #  context: .
+    #  dockerfile: components/gzweb.dockerfile
+    #  args: 
+    #    - GZRESOURCES_DIR=./gzresources
     container_name: gzweb
     ports: 
       - "8080:8080"
@@ -49,11 +44,12 @@ services:
     logging:
       driver: none
   gzserver:
-    build: 
-      context: .
-      dockerfile: components/gzserver.dockerfile
-      args: 
-        - GZRESOURCES_DIR=./gzresources
+    image: ascendntnu/gzserver
+    #build: 
+    #  context: .
+    #  dockerfile: components/gzserver.dockerfile
+    #  args: 
+    #    - GZRESOURCES_DIR=./gzresources
     container_name: gzserver
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
@@ -61,14 +57,10 @@ services:
       - ROS_MASTER_URI=http://offboard_computer:11311
       - WORLD_FILE=multiple_iris.world
   px4_1:
-    build: 
-      context: .
-      dockerfile: components/px4.dockerfile
+    image: ascendntnu/px4
     container_name: px4_1
     tty: true
   px4_2:
-    build: 
-      context: .
-      dockerfile: components/px4.dockerfile
+    image: ascendntnu/px4
     container_name: px4_2
     tty: true
