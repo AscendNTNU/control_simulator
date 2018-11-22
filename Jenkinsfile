@@ -1,7 +1,7 @@
 pipeline {
   agent {
     dockerfile {
-      filename 'components/jenkkins.dockerfile'
+      filename 'components/jenkins.dockerfile'
       args '--entrypoint=""'
       additionalBuildArgs '-t control_simulator_jenkins'
       }
@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('pre-build') {
       steps {
-        sh 'git submodule update --init'
+        sh 'git submodule update --init --recursive'
       }
     }
     stage('build') {
@@ -23,8 +23,8 @@ pipeline {
           dir ('sitl_gazebo') {
             sh 'mkdir -p build'
             dir ('build') {
-              sh 'cmake ../src && make'
-              sh 'cp *.so ../plugins'
+              sh 'cmake .. && make'
+              sh 'cp *.so ../../plugins'
             }
           }
         }
