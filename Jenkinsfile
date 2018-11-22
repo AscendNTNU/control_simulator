@@ -11,13 +11,13 @@ pipeline {
       steps {
         dir ('gzresources') {
           sh 'mkdir -p build'
-          dir ('build) {
+          dir ('build') {
             sh 'cmake ../src && make'
             sh 'cp *.so ../plugins
           }
           dir ('sitl_gazebo') {
             sh 'mkdir -p build'
-            dir ('build) {
+            dir ('build') {
               sh 'cmake ../src && make'
               sh 'cp *.so ../plugins
             }
