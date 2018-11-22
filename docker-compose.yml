@@ -55,7 +55,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
-      - WORLD_FILE=multiple_iris.world
+      - WORLD_FILE=iris_vs_static_obstacles.world
   px4_1:
     image: ascendntnu/px4
     container_name: px4_1
