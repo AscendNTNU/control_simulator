@@ -30,13 +30,16 @@ int main(int argc, char **argv)
             ("mavros/set_mode");
 
     //the setpoint publishing rate MUST be faster than 2Hz
-    ros::Rate rate(20.0);
+    ros::Rate wait_rate(0.2);
 
     // wait for FCU connection
     while(ros::ok() && !current_state.connected){
+        ROS_INFO("waiting for FCU");
         ros::spinOnce();
-        rate.sleep();
+        wait_rate.sleep();
     }
+
+    ROS_INFO("FCU connection established");
 
     geometry_msgs::PoseStamped pose;
     pose.pose.position.x = 0;
@@ -44,6 +47,7 @@ int main(int argc, char **argv)
     pose.pose.position.z = 2;
 
     //send a few setpoints before starting
+    ros::Rate rate(20.0);
     for(int i = 100; ros::ok() && i > 0; --i){
         local_pos_pub.publish(pose);
         ros::spinOnce();

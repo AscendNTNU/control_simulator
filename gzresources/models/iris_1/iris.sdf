@@ -1,5 +1,5 @@
 <sdf version='1.6'>
-  <model name='iris'>
+  <model name='iris_1'>
     <link name='base_link'>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <inertial>
@@ -425,7 +425,7 @@
       <robotNamespace/>
       <imuSubTopic>/imu</imuSubTopic>
       <gpsSubTopic>/gps</gpsSubTopic>
-      <mavlink_addr>INADDR_ANY</mavlink_addr>
+      <mavlink_addr>px4_1</mavlink_addr>
       <mavlink_udp_port>14560</mavlink_udp_port>
       <serialEnabled>false</serialEnabled>
       <serialDevice>/dev/ttyACM0</serialDevice>

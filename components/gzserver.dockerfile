@@ -38,13 +38,6 @@ ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/home/user/gzserver/plugins
 
 
 ENV WORLD_FILE testing.world
-CMD ["/bin/bash", "-c", "\
-  set +e \
-  && export ROS_IP=$(hostname -i) \
-  && echo \"ROS_IP is ${ROS_IP}\" \
-  && rm -rf /tmp/.X1-lock \
-  && Xvfb :1 -screen 0 1280x720x16 & \
-  export DISPLAY=:1.0 \ 
-  && source /opt/ros/kinetic/setup.bash \
-  && rosrun gazebo_ros gzserver --verbose $PWD/worlds/${WORLD_FILE}"]
+COPY /components/gzserver_entrypoint.sh ./gzserver_entrypoint.sh
+ENTRYPOINT ["./gzserver_entrypoint.sh"]
 
