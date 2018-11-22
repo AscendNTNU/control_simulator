@@ -1,0 +1,3 @@
+/home/cale/control_simulator/gzresources/src/build/CMakeFiles/edit_cache.dir
+/home/cale/control_simulator/gzresources/src/build/CMakeFiles/rebuild_cache.dir
+/home/cale/control_simulator/gzresources/src/build/CMakeFiles/enemy_drone.dir
