@@ -7,12 +7,12 @@ pipeline {
       }
   }
   stages {
-    stage('pre-build') {
+    stage('fetch-submodules') {
       steps {
         sh 'git submodule update --init --recursive'
       }
     }
-    stage('build') {
+    stage('compile-plugins') {
       steps {
         dir ('gzresources') {
           sh 'mkdir -p build'
