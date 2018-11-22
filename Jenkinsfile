@@ -33,6 +33,7 @@ pipeline {
   }
   post {
     cleanup {
+      sh 'pwd'
       sh 'ls'
       sh 'ls catkin_ws'
       sh 'ls gzresources'
