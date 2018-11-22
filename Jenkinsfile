@@ -1,7 +1,7 @@
 pipeline {
   agent {
     dockerfile {
-      filename 'components/jenkkins.dockerfile'
+      filename 'components/jenkins.dockerfile'
       args '--entrypoint=""'
       additionalBuildArgs '-t control_simulator_jenkins'
       }
