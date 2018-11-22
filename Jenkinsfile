@@ -1,10 +1,5 @@
 pipeline {
-  agent { 
-    dockerfile {
-      filename 'dockerfiles/jenkins.dockerfile'
-      args '--entrypoint=""'
-      additionalBuildArgs '-t control_simulator_jenkins'
-    }
+  agent any
   }
   stages {
     stage('pre-build') {
@@ -14,11 +9,13 @@ pipeline {
     }
     stage('build') {
       steps {
-        dir ('catkin_ws') {
-          sh '. /opt/ros/kinetic/setup.sh && catkin_make'
+        dir ('gzresources') {
+          sh 'mkdir -p build'
+          dir ('build) {
+            sh 'cmake ../src && make'
+            sh 'cp *.so ../plugins
+          }
         }
-
-        sh './build_plugins.sh'
       }
     }
   }
