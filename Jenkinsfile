@@ -1,5 +1,11 @@
 pipeline {
-  agent any
+  agent {
+    dockerfile {
+      filename 'components/jenkkins.dockerfile'
+      args '--entrypoint=""'
+      additionalBuildArgs '-t control_simulator_jenkins'
+      }
+  }
   stages {
     stage('pre-build') {
       steps {
