@@ -19,7 +19,7 @@ pipeline {
           dir ('sitl_gazebo') {
             sh 'mkdir -p build'
             dir ('build') {
-              sh 'export GAZEBO_MODEL_PATH=$PWD && cmake ../src && make'
+              sh 'export GAZEBO_MODEL_PATH=$PWD && cmake .. && make'
               sh 'cp *.so ../../plugins'
             }
           }
