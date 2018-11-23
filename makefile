@@ -1,13 +1,27 @@
 
+all: sitl-gazebo-plugins custom-gazebo-plugins iris-models
 
 .PHONY:
-all: containers gzplugins
-
+custom-gazebo-plugins:
+	cd gzresources && \
+	mkdir -p build && \
+	cd build && \
+	cmake ../src && \
+	make && \
+	cp *.so ../plugins
 
 .PHONY:
-containers: gzplugins
-	docker-compose build
+sitl-gazebo-plugins:
+	cd gzresources/sitl_gazebo && \
+	mkdir -p build && \
+	cd build && \
+	cmake .. && \
+	make && \
+	cp *.so ../../plugins 
 
 .PHONY:
-gzplugins:
-	./build_plugins.sh
+iris-models:
+	cd scripts && \
+	./make_iris.sh 4
+
+
