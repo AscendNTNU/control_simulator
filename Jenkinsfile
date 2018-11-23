@@ -2,7 +2,6 @@ pipeline {
   agent {
     dockerfile {
       filename 'components/jenkins.dockerfile'
-      args '--entrypoint="" -v /var/lib/jenkins/workspace/control_simulator:/home/user'
       additionalBuildArgs '-t control_simulator_jenkins'
       }
   }
