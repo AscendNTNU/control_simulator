@@ -1,7 +1,5 @@
 pipeline {
-  agent {
-    docker { image 'px4io/px4-dev-ros-kinetic' }
-  }
+  agent any
   stages {
     stage('fetch-resources') {
       steps {
