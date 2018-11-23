@@ -25,7 +25,7 @@ pipeline {
           dir ('sitl_gazebo') {
             sh 'mkdir -p build'
             dir ('build') {
-              sh 'cmake .. && make'
+              sh 'cmake .. && make -W sdf'
               sh 'cp *.so ../../plugins'
             }
           }
