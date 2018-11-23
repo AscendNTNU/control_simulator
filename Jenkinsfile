@@ -7,13 +7,13 @@ pipeline {
       }
   }
   stages {
-    stage('fetch-submodules') {
+    stage('fetch-resources') {
       steps {
         sh 'pwd'
         sh 'git submodule update --init --recursive'
       }
     }
-    stage('compile-plugins') {
+    stage('build-resources') {
       steps {
         sh 'pwd'
         dir ('gzresources') {
@@ -29,6 +29,9 @@ pipeline {
               sh 'cp *.so ../../plugins'
             }
           }
+        }
+        dir ('scripts') {
+          sh './make_iris.sh 4'
         }
       }
     }
