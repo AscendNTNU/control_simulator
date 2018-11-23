@@ -44,4 +44,9 @@ The catkin_ws folder is compiled and made available on the offboard computer and
 
 ## Development
 
-### Recompiling plugins for gazebo
+### Updating docker images
+To reduce build time and docker-compose.yml as simple as possible, all images have been pushed to ascend dockerhub. In order to update them in the repo, you first have to make sure your docker user is added to the organization [ascendntnu](https://hub.docker.com/u/ascendntnu/). After this is done, the following commands will push your local changes to the repository. 
+```
+docker login # logs in and gives push access to repository
+make upload-images # compiles everything needed, builds images, and pushes
+```
