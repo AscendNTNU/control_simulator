@@ -15,23 +15,7 @@ pipeline {
     stage('build-resources') {
       steps {
         sh 'pwd'
-        dir ('gzresources') {
-          sh 'mkdir -p build'
-          dir ('build') {
-            sh 'cmake ../src && make'
-            sh 'cp *.so ../plugins'
-          }
-          dir ('sitl_gazebo') {
-            sh 'mkdir -p build'
-            dir ('build') {
-              sh 'cmake .. && make'
-              sh 'cp *.so ../../plugins'
-            }
-          }
-        }
-        dir ('scripts') {
-          sh './make_iris.sh 4'
-        }
+        sh 'make'
       }
     }
   }
