@@ -16,17 +16,17 @@ pipeline {
       steps {
         sh 'pwd'
         dir ('gzresources') {
+          dir ('sitl_gazebo') {
+            sh 'mkdir -p build'
+            dir ('build') {
+              sh 'export GAZEBO_MODEL_PATH=$PWD && cmake ../src && make'
+              sh 'cp *.so ../../plugins'
+            }
+          }
           sh 'mkdir -p build'
           dir ('build') {
             sh 'cmake ../src && make'
             sh 'cp *.so ../plugins'
-          }
-          dir ('sitl_gazebo') {
-            sh 'mkdir -p build'
-            dir ('build') {
-              sh 'cmake .. && make'
-              sh 'cp *.so ../../plugins'
-            }
           }
         }
         dir ('scripts') {
