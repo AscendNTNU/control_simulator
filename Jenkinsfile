@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    dockerfile {
-      filename 'components/jenkins.dockerfile'
-      additionalBuildArgs '-t control_simulator_jenkins'
-      }
-  }
+  agent any
   stages {
     stage('fetch-resources') {
       steps {
