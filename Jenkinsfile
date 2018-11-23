@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    dockerfile {
+      filename 'components/jenkins.dockerfile'
+      args '..entrypoint=""'
+    }
+  }
   stages {
     stage('fetch-resources') {
       steps {
