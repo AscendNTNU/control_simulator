@@ -2,7 +2,7 @@ pipeline {
   agent {
     dockerfile {
       filename 'components/jenkins.dockerfile'
-      args '--entrypoint="" -v /var/lib/jenkins/workspace/control_simulator:/home/user'
+      args '--entrypoint="" -v /var/lib/jenkins/workspace/control_simulator:/.gazebo:rw'
       additionalBuildArgs '-t control_simulator_jenkins'
       }
   }
@@ -25,7 +25,7 @@ pipeline {
           dir ('sitl_gazebo') {
             sh 'mkdir -p build'
             dir ('build') {
-              sh 'cmake .. && make -W sdf'
+              sh 'cmake .. && make'
               sh 'cp *.so ../../plugins'
             }
           }
