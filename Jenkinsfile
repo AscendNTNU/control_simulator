@@ -1,9 +1,6 @@
 pipeline {
   agent {
-    dockerfile {
-      filename 'components/jenkins.dockerfile'
-      additionalBuildArgs '-t control_simulator_jenkins'
-      }
+    docker { image 'px4io/px4-dev-ros-kinetic' }
   }
   stages {
     stage('fetch-resources') {
