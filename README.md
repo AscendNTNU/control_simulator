@@ -49,5 +49,5 @@ To reduce build time and docker-compose.yml as simple as possible, all images ha
 ```
 docker login                                        # logs in and gives push access to repository
 export RELEASE_TAG=$(./scripts/get_upload_tag.sh)   # setup for tagging images
-make upload-images                                  # compiles everything needed, builds images, and pushes
+make upload-images                                  # compiles everything needed, builds images, and pushe
 ```
