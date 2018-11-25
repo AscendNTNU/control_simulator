@@ -3,12 +3,10 @@ services:
   offboard_computer:
     image: ascendntnu/control_simulator_pc_node
     container_name: offboard_computer
-    #command: roslaunch obstacle_publisher obtacle_publisher.launch
-    command: roscore
+    command: roslaunch obstacle_publisher obtacle_publisher.launch
+    #command: roscore
     ports:
       - "11311:11311" # expose rosmaster to host-computer
-    logging:
-      driver: none
   onboard_computer_1:
     image: ascendntnu/control_simulator_pc_node
     container_name: onboard_computer_1
@@ -41,10 +39,13 @@ services:
     container_name: onboard_computer_4
     #command: echo "node disabled from docker-compose.yml"
     command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_4
+
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
     depends_on:
       - offboard_computer
+    logging:
+      driver: none
   gzweb:
     image: ascendntnu/gzweb
     container_name: gzweb
@@ -80,4 +81,3 @@ services:
     image: ascendntnu/px4
     container_name: px4_4
     tty: true
-

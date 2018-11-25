@@ -1,21 +1,26 @@
 <sdf version="1.6">
   <model name="danger_sphere_obstacle">
-    <static>1</static>
     <link name="base">
       <collision name="collision">
         <geometry>
-          <sphere>
-            <radius>0.3</radius>
-          </sphere>
+          <box>
+            <size>0.3 0.3 0.3</size>
+          </box>
         </geometry>
       </collision>
       <visual name="visual">
         <geometry>
           <sphere>
-            <radius>0.3</radius>
+            <radius>0.15</radius>
           </sphere>
         </geometry>
       </visual>
     </link>
+    <plugin name="enemy_drone" filename="libenemy_drone.so">
+      <x_min>-7.5</x_min>
+      <x_max>7.5</x_max>
+      <y_min>-11.5</y_min>
+      <y_max>11.5</y_max>
+    </plugin>
   </model>
 </sdf>
