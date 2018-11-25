@@ -26,7 +26,6 @@ iris-models:
 
 .PHONY:
 build-images: sitl-gazebo-plugins custom-gazebo-plugins iris-models
-	RELEASE_TAG=$(./scripts/get_upload_tag.sh)
 	docker build -t ascendntnu/control_simulator_pc_node:${RELEASE_TAG} -f components/computer.dockerfile .
 	docker build -t ascendntnu/gzweb:${RELEASE_TAG} --build-arg GZRESOURCES_DIR=gzresources -f components/gzweb.dockerfile .
 	docker build -t ascendntnu/gzserver:${RELEASE_TAG} --build-arg GZRESOURCES_DIR=gzresources -f components/gzserver.dockerfile .
@@ -34,7 +33,6 @@ build-images: sitl-gazebo-plugins custom-gazebo-plugins iris-models
 
 .PHONY:
 upload-images: build-images
-	RELEASE_TAG=$(./scripts/get_upload_tag.sh)
 	docker push ascendntnu/control_simulator_pc_node:${RELEASE_TAG}
 	docker push ascendntnu/gzweb:${RELEASE_TAG}
 	docker push ascendntnu/gzserver:${RELEASE_TAG}
