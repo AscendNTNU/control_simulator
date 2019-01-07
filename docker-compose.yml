@@ -1,14 +1,14 @@
 version: '3'
 services:
   offboard_computer:
-    image: ascendntnu/control_simulator_pc_node
+    image: ascendntnu/control_simulator_pc_node:edge
     container_name: offboard_computer
     command: roslaunch obstacle_publisher obtacle_publisher.launch
     #command: roscore
     ports:
       - "11311:11311" # expose rosmaster to host-computer
   onboard_computer_1:
-    image: ascendntnu/control_simulator_pc_node
+    image: ascendntnu/control_simulator_pc_node:edge
     container_name: onboard_computer_1
     #command: echo "node disabled from docker-compose.yml"
     command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_1 
@@ -17,7 +17,7 @@ services:
     depends_on:
       - offboard_computer
   onboard_computer_2:
-    image: ascendntnu/control_simulator_pc_node
+    image: ascendntnu/control_simulator_pc_node:edge
     container_name: onboard_computer_2
     #command: echo "node disabled from docker-compose.yml"
     command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_2
@@ -26,7 +26,7 @@ services:
     depends_on:
       - offboard_computer
   onboard_computer_3:
-    image: ascendntnu/control_simulator_pc_node
+    image: ascendntnu/control_simulator_pc_node:edge
     container_name: onboard_computer_3
     #command: echo "node disabled from docker-compose.yml"
     command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_3 
@@ -35,7 +35,7 @@ services:
     depends_on:
       - offboard_computer
   onboard_computer_4:
-    image: ascendntnu/control_simulator_pc_node
+    image: ascendntnu/control_simulator_pc_node:edge
     container_name: onboard_computer_4
     #command: echo "node disabled from docker-compose.yml"
     command: roslaunch --wait test_pkg takeoff.launch px4_addr:=px4_4
@@ -47,7 +47,7 @@ services:
     logging:
       driver: none
   gzweb:
-    image: ascendntnu/gzweb
+    image: ascendntnu/gzweb:edge
     container_name: gzweb
     ports: 
       - "8080:8080"
@@ -58,7 +58,7 @@ services:
     logging:
       driver: none
   gzserver:
-    image: ascendntnu/gzserver
+    image: ascendntnu/gzserver:edge
     container_name: gzserver
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
@@ -66,18 +66,18 @@ services:
       - ROS_MASTER_URI=http://offboard_computer:11311
       - WORLD_FILE=multiple_iris.world
   px4_1:
-    image: ascendntnu/px4
+    image: ascendntnu/px4:edge
     container_name: px4_1
     tty: true
   px4_2:
-    image: ascendntnu/px4
+    image: ascendntnu/px4:edge
     container_name: px4_2
     tty: true
   px4_3:
-    image: ascendntnu/px4
+    image: ascendntnu/px4:edge
     container_name: px4_3
     tty: true
   px4_4:
-    image: ascendntnu/px4
+    image: ascendntnu/px4:edge
     container_name: px4_4
     tty: true

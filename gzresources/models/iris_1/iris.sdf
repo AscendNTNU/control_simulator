@@ -38,7 +38,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://rotors_description/meshes/iris.stl</uri>
+            <uri>model://rotors_description/meshes/ascend_body.dae</uri>
           </mesh>
         </geometry>
         <material>
