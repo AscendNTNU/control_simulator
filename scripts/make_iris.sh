@@ -32,7 +32,16 @@ make_single_iris()
 
   gz sdf -p $models_path/rotors_description/urdf/iris_base.urdf >> $iris_path/iris.sdf
 
+  # Add custom mesh
   sed -i -e "s/iris.stl/ascend_body.dae/g" $iris_path/iris.sdf
+
+  # Realign rotors
+  sed -i -e "s/0.13\ -0.22\ 0.023/0.23\ -0.22\ 0.023/g" $iris_path/iris.sdf
+  sed -i -e "s/-0.13\ 0.2\ 0.023/-0.23\ 0.2\ 0.023/g" $iris_path/iris.sdf
+  sed -i -e "s/0.13\ 0.22\ 0.023/0.23\ 0.22\ 0.023/g" $iris_path/iris.sdf
+  sed -i -e "s/-0.13\ -0.2\ 0.023/-0.23\ -0.2\ 0.023/g" $iris_path/iris.sdf
+
+  # Network configuration
   sed -i -e "s/name='iris'/name='iris_$iris_i'/g" $iris_path/iris.sdf
   sed -i -e "s/<mavlink_addr>INADDR_ANY<\/mavlink_addr>/<mavlink_addr>px4_$iris_i<\/mavlink_addr>/g" $iris_path/iris.sdf
 
