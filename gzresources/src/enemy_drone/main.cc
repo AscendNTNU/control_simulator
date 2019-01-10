@@ -30,7 +30,7 @@ namespace gazebo
               this->generator = std::mt19937(rd());
               x_distribution = std::uniform_real_distribution<float>(x_min, x_max);
               y_distribution = std::uniform_real_distribution<float>(y_min, y_max);
-              time_distribution = std::uniform_real_distribution<float>(10.f, 40.f);
+              time_distribution = std::uniform_real_distribution<float>(7.f, 40.f);
 
               x_goal = x_distribution(generator);
               y_goal = y_distribution(generator);
@@ -72,7 +72,7 @@ namespace gazebo
 
     private: event::ConnectionPtr updateConnection;
 
-    private: float x_min=0.f, x_max=0.f, y_min=0.f, y_max=0.f, x_goal=0.f, y_goal=0.f, speed=1.f, altitude=2.f, change_time=5.f;
+    private: float x_min=0.f, x_max=0.f, y_min=0.f, y_max=0.f, x_goal=0.f, y_goal=0.f, speed=1.f, altitude=2.5f, change_time=5.f;
 
     private: common::Timer timer;
 

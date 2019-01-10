@@ -14,6 +14,8 @@ services:
     command: roslaunch --wait fluid_fsm fluid_fsm.launch nodename:=fluid_1 px4_addr:=px4_1 
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
+    ports:
+      - "10001:14556"
     depends_on:
       - offboard_computer
   gzweb:
@@ -41,3 +43,7 @@ services:
     image: ascendntnu/px4:edge
     container_name: px4_1
     tty: true
+    ports:
+      - "14556:10001"
+    depends_on:
+      - onboard_computer_1
