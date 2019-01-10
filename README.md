@@ -57,3 +57,10 @@ docker login                                        # logs in and gives push acc
 export RELEASE_TAG=$(./scripts/get_upload_tag.sh)   # setup for tagging images
 make upload-images                                  # compiles everything needed, builds images, and pushes to dockerhub
 ```
+
+### Troubleshooting
+#### "Could not find AF_INET address for [your-computer-name-here]"
+*Solution*: `source scripts/expose_host.sh`
+
+*Why*: Need to set ROS_IP so that computers within the ROS and docker network know how to reach your computer. ROS_IP should be the IP of your computer within the docker network, probably `172.19.0.1`. If this doesn't work you should inspect your docker network.  
+
