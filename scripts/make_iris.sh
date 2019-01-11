@@ -36,10 +36,10 @@ make_single_iris()
   sed -i -e "s/iris.stl/ascend_body.dae/g" $iris_path/iris.sdf
 
   # Realign rotors
-  sed -i -e "s/0.13\ -0.22\ 0.023/0.23\ -0.22\ 0.023/g" $iris_path/iris.sdf
-  sed -i -e "s/-0.13\ 0.2\ 0.023/-0.23\ 0.2\ 0.023/g" $iris_path/iris.sdf
-  sed -i -e "s/0.13\ 0.22\ 0.023/0.23\ 0.22\ 0.023/g" $iris_path/iris.sdf
-  sed -i -e "s/-0.13\ -0.2\ 0.023/-0.23\ -0.2\ 0.023/g" $iris_path/iris.sdf
+  sed -i -e "s/0.13\ -0.22\ 0.023/0.15\ -0.15\ 0.023/g" $iris_path/iris.sdf
+  sed -i -e "s/-0.13\ 0.2\ 0.023/-0.15\ 0.15\ 0.023/g" $iris_path/iris.sdf
+  sed -i -e "s/0.13\ 0.22\ 0.023/0.15\ 0.15\ 0.023/g" $iris_path/iris.sdf
+  sed -i -e "s/-0.13\ -0.2\ 0.023/-0.15\ -0.15\ 0.023/g" $iris_path/iris.sdf
 
   # Network configuration
   sed -i -e "s/name='iris'/name='iris_$iris_i'/g" $iris_path/iris.sdf
