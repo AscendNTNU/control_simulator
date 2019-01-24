@@ -44,6 +44,7 @@ make_single_iris()
   # Network configuration
   sed -i -e "s/name='iris'/name='iris_$iris_i'/g" $iris_path/iris.sdf
   sed -i -e "s/<mavlink_addr>INADDR_ANY<\/mavlink_addr>/<mavlink_addr>px4_$iris_i<\/mavlink_addr>/g" $iris_path/iris.sdf
+  #sed -i -e "s/<mavlink_addr>INADDR_ANY<\/mavlink_addr>/<mavlink_addr>drone_$iris_i<\/mavlink_addr>/g" $iris_path/iris.sdf
 
   # model.config
   cp $models_path/iris/model.config $iris_path/

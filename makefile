@@ -30,6 +30,7 @@ build-images: sitl-gazebo-plugins custom-gazebo-plugins iris-models
 	docker build -t ascendntnu/gzweb:${RELEASE_TAG} --build-arg GZRESOURCES_DIR=gzresources -f components/gzweb.dockerfile .
 	docker build -t ascendntnu/gzserver:${RELEASE_TAG} --build-arg GZRESOURCES_DIR=gzresources -f components/gzserver.dockerfile .
 	docker build -t ascendntnu/px4:${RELEASE_TAG} -f components/px4.dockerfile .
+	docker build -t ascendntnu/simulator_drone:${RELEASE_TAG} -f components/drone.dockerfile .
 
 .PHONY:
 upload-images: build-images
@@ -37,4 +38,5 @@ upload-images: build-images
 	docker push ascendntnu/gzweb:${RELEASE_TAG}
 	docker push ascendntnu/gzserver:${RELEASE_TAG}
 	docker push ascendntnu/px4:${RELEASE_TAG}
+	docker push ascendntnu/simulator_drone:${RELEASE_TAG}
 

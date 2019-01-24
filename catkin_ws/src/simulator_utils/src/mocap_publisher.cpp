@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
 
 
   ROS_INFO("Subscribing to topic");
-  ros::Subscriber sub = nh.subscribe("/fluid_1/mavros/local_position/pose", 1, callback);
+  ros::Subscriber sub = nh.subscribe("not_mavros/local_position/pose", 1, callback);
 
   ros::Rate rate(1);
 
@@ -50,7 +50,11 @@ int main(int argc, char** argv) {
   while (ros::ok()) {
     if (poseMsg) {
       std::cout << poseMsg->pose.position << std::endl;
+      ROS_INFO_STREAM("Position:" << poseMsg->pose.position);
     }
+
+
+    ROS_INFO_STREAM("ptr:" << poseMsg);
 
     rate.sleep();
   }
