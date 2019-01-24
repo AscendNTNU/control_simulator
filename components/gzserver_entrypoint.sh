@@ -12,3 +12,4 @@ source /opt/ros/kinetic/setup.bash
 
 echo "Launching server, world: $PWD/worlds/${WORLD_FILE}"
 roslaunch --wait gazebo_ros empty_world.launch gui:=false world_name:=$PWD/worlds/${WORLD_FILE}
+

@@ -1,0 +1,6 @@
+<launch>
+
+  <node name="mocap_node" pkg="mocap_node" type="mocap_node" output="screen">
+    <param name="drone_name" value="fluid_1"/>
+  </node>
+</launch>

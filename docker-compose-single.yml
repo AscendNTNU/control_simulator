@@ -3,21 +3,25 @@ services:
   offboard_computer:
     image: ascendntnu/control_simulator_pc_node:edge
     container_name: offboard_computer
-    command: roslaunch obstacle_publisher obtacle_publisher.launch
-    #command: roscore
+    command: roslaunch obstacle_publisher obstacle_publisher.launch
     ports:
       - "11311:11311" # expose rosmaster to host-computer
   onboard_computer_1:
     image: ascendntnu/control_simulator_pc_node:edge
     container_name: onboard_computer_1
-    #command: echo "node disabled from .yml file"
-    command: roslaunch --wait fluid_fsm fluid_fsm.launch nodename:=fluid_1 px4_addr:=px4_1 
+    command: roslaunch --wait simulator_utils jetson.launch px4_addr:=px4_1
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
-    ports:
-      - "10001:14556"
     depends_on:
       - offboard_computer
+  px4_1:
+    image: ascendntnu/px4:edge
+    container_name: px4_1
+    tty: true
+    depends_on:
+      - onboard_computer_1
+
+  # ---------- SIMULATOR BACKEND ------------
   gzweb:
     image: ascendntnu/gzweb:edge
     container_name: gzweb
@@ -37,13 +41,10 @@ services:
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
       - WORLD_FILE=single_world.world
-    logging:
-      driver: none
-  px4_1:
-    image: ascendntnu/px4:edge
-    container_name: px4_1
-    tty: true
-    ports:
-      - "14556:10001"
-    depends_on:
-      - onboard_computer_1
+        #  mocap_node:
+        #    image: ascendntnu/control_simulator_pc_node:edge
+        #    container_name: mocap_node
+        #    command: roslaunch --wait mocap_node mocap_node.launch 
+        #    environment:
+        #      - ROS_MASTER_URI=http://offboard_computer:11311
+        #
