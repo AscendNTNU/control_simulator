@@ -15,19 +15,19 @@
     </include>
     <include>
       <uri>model://iris_1</uri>
-      <pose>5.0 -10.0 0.83 0 0 0</pose>
+      <pose>0.0 10.0 0.83 0 0 0</pose>
     </include>
     <include>
       <uri>model://iris_2</uri>
-      <pose>2.5 -10.0 0.83 0 0 0</pose>
+      <pose>0.0 3.0 0.83 0 0 0</pose>
     </include>
     <include>
       <uri>model://iris_3</uri>
-      <pose>-2.5 -10.0 0.83 0 0 0</pose>
+      <pose>0 -3.0 0.83 0 0 0</pose>
     </include>
     <include>
       <uri>model://iris_4</uri>
-      <pose>-5.0 -10.0 0.83 0 0 0</pose>
+      <pose>0 -10.0 0.83 0 0 0</pose>
     </include>
     <include>
       <uri>model://danger_sphere_obstacle</uri>

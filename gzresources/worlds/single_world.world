@@ -15,7 +15,7 @@
     </include>
     <include>
       <uri>model://iris_1</uri>
-      <pose>0.0 -10.0 0.83 0 0 0</pose>
+      <pose>0.0 0.0 0.83 0 0 0</pose>
     </include>
     <include>
       <uri>model://danger_sphere_obstacle</uri>
