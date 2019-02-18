@@ -44,23 +44,11 @@ The catkin_ws folder is compiled and made available on the offboard computer and
 
 ## Development
 
-### Updating docker images 
-
-Working locally will be sufficient in many cases, especially for testing. To update the local images, we can use
-```
-make    # compiles everything needed, builds images
-```
-
+### Updating docker images
 To reduce build time and docker-compose.yml as simple as possible, all images have been pushed to ascend dockerhub. In order to update them in the repo, you first have to make sure your docker user is added to the organization [ascendntnu](https://hub.docker.com/u/ascendntnu/). After this is done, the following commands will push your local changes to the repository. 
 ```
+docker build -t control_simulator_builder .         # build image with all dependencies needed to build other images
+docker run -v /var/run/docker.sock:/run/docker.sock -v $(which docker):/bin/docker control_simulator_builder  # compiles code and build all images
 docker login                                        # logs in and gives push access to repository
-export RELEASE_TAG=$(./scripts/get_upload_tag.sh)   # setup for tagging images
-make upload-images                                  # compiles everything needed, builds images, and pushes to dockerhub
+make upload-images                                  # pushes images, assumes they already are build
 ```
-
-### Troubleshooting
-#### "Could not find AF_INET address for [your-computer-name-here]"
-*Solution*: `source scripts/expose_host.sh`
-
-*Why*: Need to set ROS_IP so that computers within the ROS and docker network know how to reach your computer. ROS_IP should be the IP of your computer within the docker network, probably `172.19.0.1`. If this doesn't work you should inspect your docker network.  
-

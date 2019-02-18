@@ -2,5 +2,5 @@ catkin_ws/build
 catkin_ws/devel
 gzresources/build
 gzresources/plugins
-gzresources/models/iris_*
+gzresources/models/iris_*/*
 

@@ -85,7 +85,7 @@
       </axis>
     </joint>
     <link name='rotor_0'>
-      <pose frame=''>0.13 -0.22 0.023 0 -0 0</pose>
+      <pose frame=''>0.16 -0.16 0.023 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.005</mass>
@@ -119,7 +119,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <scale>1 1 1</scale>
+            <scale>0.8 0.8 0.8</scale>
             <uri>model://rotors_description/meshes/iris_prop_ccw.dae</uri>
           </mesh>
         </geometry>
@@ -150,7 +150,7 @@
       </axis>
     </joint>
     <link name='rotor_1'>
-      <pose frame=''>-0.13 0.2 0.023 0 -0 0</pose>
+      <pose frame=''>-0.16 0.16 0.023 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.005</mass>
@@ -184,7 +184,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <scale>1 1 1</scale>
+            <scale>0.8 0.8 0.8</scale>
             <uri>model://rotors_description/meshes/iris_prop_ccw.dae</uri>
           </mesh>
         </geometry>
@@ -215,7 +215,7 @@
       </axis>
     </joint>
     <link name='rotor_2'>
-      <pose frame=''>0.13 0.22 0.023 0 -0 0</pose>
+      <pose frame=''>0.16 0.16 0.023 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.005</mass>
@@ -249,7 +249,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <scale>1 1 1</scale>
+            <scale>0.8 0.8 0.8</scale>
             <uri>model://rotors_description/meshes/iris_prop_cw.dae</uri>
           </mesh>
         </geometry>
@@ -280,7 +280,7 @@
       </axis>
     </joint>
     <link name='rotor_3'>
-      <pose frame=''>-0.13 -0.2 0.023 0 -0 0</pose>
+      <pose frame=''>-0.16 -0.16 0.023 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.005</mass>
@@ -314,7 +314,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <scale>1 1 1</scale>
+            <scale>0.8 0.8 0.8</scale>
             <uri>model://rotors_description/meshes/iris_prop_cw.dae</uri>
           </mesh>
         </geometry>
