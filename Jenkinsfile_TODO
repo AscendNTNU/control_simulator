@@ -1,0 +1,21 @@
+pipeline {
+  agent {
+    dockerfile {
+      filename 'Dockerfile'
+      additionalBuildArgs '-t control_simulator_builder'
+    }
+  }
+  stages {
+    stage('build-images') {
+      steps {
+        sh 'make'
+      }
+    }
+  }
+  post {
+    cleanup {
+      cleanWs()
+    }
+  }
+}
+
