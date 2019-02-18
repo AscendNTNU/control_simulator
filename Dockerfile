@@ -1,6 +1,6 @@
 FROM gazebo:libgazebo7
 
-# Install ros
+# Install ros and build tools
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' \
   && apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116 \
   && apt-get update \
@@ -14,14 +14,17 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"
     geographiclib-tools \
     libeigen3-dev \
     libopencv-dev \
+    libprotoc-dev \
+    git \
+    protobuf-compiler \
+    python-pip \
   && rm -rf /var/lib/apt/lists/* \
+  && python -m pip install jinja2 \
   && rosdep init \
   && rosdep update
 
 WORKDIR /home/user/control_simulator
 COPY . .
 
-RUN apt-get update && apt-get install -y git-all && git submodule update --init --recursive
-
-#RUN make
-CMD bash
+RUN git submodule update --init --recursive
+RUN . /opt/ros/kinetic/setup.sh && make
