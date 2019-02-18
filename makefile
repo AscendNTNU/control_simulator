@@ -1,5 +1,5 @@
 
-all: sitl-gazebo-plugins custom-gazebo-plugins iris-models build-images
+all: sitl-gazebo-plugins custom-gazebo-plugins iris-models 
 
 .PHONY:
 custom-gazebo-plugins:
