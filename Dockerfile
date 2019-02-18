@@ -21,10 +21,12 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"
   && rm -rf /var/lib/apt/lists/* \
   && python -m pip install jinja2 \
   && rosdep init \
-  && rosdep update
+  && rosdep update 
 
 WORKDIR /home/user/control_simulator
 COPY . .
-
-RUN git submodule update --init --recursive
-RUN . /opt/ros/kinetic/setup.sh && make
+RUN git submodule update --init --recursive \
+    && . /opt/ros/kinetic/setup.sh \
+    && make
+RUN mv components/builder_entrypoint.sh ./entrypoint.sh
+ENTRYPOINT [ "./entrypoint.sh" ]
