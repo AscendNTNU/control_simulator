@@ -36,6 +36,7 @@ build-images: sitl-gazebo-plugins custom-gazebo-plugins iris-models
 
 .PHONY:
 upload-images: 
+	docker login
 	docker push ascendntnu/control_simulator_pc_node
 	docker push ascendntnu/gzweb
 	docker push ascendntnu/gzserver

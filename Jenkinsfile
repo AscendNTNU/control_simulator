@@ -6,6 +6,11 @@ pipeline {
         sh './scripts/build_images.sh'
       }
     }
+    stage('upload-images') {
+      steps {
+        sh 'make upload-images'
+      }
+    }
   }
   post {
     cleanup {
