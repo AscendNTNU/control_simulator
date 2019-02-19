@@ -25,7 +25,6 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"
 
 WORKDIR /home/user/control_simulator
 COPY . .
-RUN git submodule update --init --recursive
 RUN mv components/builder_entrypoint.sh ./entrypoint.sh
 
 ENTRYPOINT [ "./entrypoint.sh" ]
