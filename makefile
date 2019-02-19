@@ -4,6 +4,7 @@ all: sitl-gazebo-plugins custom-gazebo-plugins iris-models
 .PHONY:
 custom-gazebo-plugins:
 	cd gzresources && \
+	mkdir -p plugins && \
 	mkdir -p build && \
 	cd build && \
 	cmake ../src && \
