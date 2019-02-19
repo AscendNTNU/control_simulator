@@ -42,14 +42,13 @@ int main(int argc, char** argv) {
 
 
   ROS_INFO("Subscribing to topic");
-  ros::Subscriber sub = nh.subscribe("not_mavros/local_position/pose", 1, callback);
+  ros::Subscriber sub = nh.subscribe("mavros/local_position/pose", 1, callback);
 
   ros::Rate rate(1);
 
   ROS_INFO("Going into while loop");
   while (ros::ok()) {
     if (poseMsg) {
-      std::cout << poseMsg->pose.position << std::endl;
       ROS_INFO_STREAM("Position:" << poseMsg->pose.position);
     }
 
