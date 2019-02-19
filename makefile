@@ -12,7 +12,9 @@ custom-gazebo-plugins:
 
 .PHONY:
 sitl-gazebo-plugins:
-	cd gzresources/sitl_gazebo && \
+	cd gzresources && \
+	mkdir -p plugins && \
+	cd sitl_gazebo && \
 	mkdir -p build && \
 	cd build && \
 	cmake .. && \
