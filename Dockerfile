@@ -23,9 +23,7 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"
   && rosdep init \
   && rosdep update 
 
-WORKDIR /home/user/control_simulator
+WORKDIR /root/control_simulator
 COPY . .
 RUN mv components/builder_entrypoint.sh ./entrypoint.sh
-
 ENTRYPOINT [ "./entrypoint.sh" ]
-CMD bash
