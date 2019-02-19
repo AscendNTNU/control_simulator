@@ -3,7 +3,7 @@
 	url = git@github.com:AscendNTNU/sitl_gazebo.git
 [submodule "catkin_ws/src/ascend_msgs"]
 	path = catkin_ws/src/ascend_msgs
-	url = git@github.com:AscendNTNU/ascend_msgs.git
+	url = https://github.com/AscendNTNU/ascend_msgs.git
 [submodule "catkin_ws/src/fluid_fsm"]
 	path = catkin_ws/src/fluid_fsm
 	url = git@github.com:AscendNTNU/fluid_fsm.git
