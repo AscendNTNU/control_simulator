@@ -25,5 +25,4 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"
 
 WORKDIR /root/control_simulator
 COPY . .
-RUN mv components/builder_entrypoint.sh ./entrypoint.sh
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "./scripts/builder_entrypoint.sh" ]
