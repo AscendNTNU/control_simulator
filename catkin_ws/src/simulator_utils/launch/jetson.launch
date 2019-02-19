@@ -11,6 +11,7 @@
   <group ns="$(arg px4_addr)">
     <node name="fluid_fsm_client" pkg="fluid_fsm" type="test_client" output="screen"/>
 
-    <node name="mocap_publisher" pkg="simulator_utils" type="mocap_publisher_node" output="screen"/>
+    <node name="mocap_publisher" pkg="simulator_utils" type="mocap_publisher_node" output="screen">
+   </node>
   </group>
 </launch>
