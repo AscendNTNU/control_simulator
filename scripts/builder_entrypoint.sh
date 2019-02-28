@@ -2,7 +2,7 @@
 
 source /opt/ros/kinetic/setup.bash 
 git submodule update --init --recursive
-make build-images
+make -j4 build-images
 exec ${@}
 
 
