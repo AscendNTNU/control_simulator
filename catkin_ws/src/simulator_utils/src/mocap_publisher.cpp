@@ -1,61 +1,66 @@
 #include <ros/ros.h>
 #include <string>
+#include <map>
 #include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/Pose.h>
+#include <gazebo_msgs/ModelStates.h>
 
-class DroneWatcher {
+class DronePosePub {
   private:
-    const std::string droneName;
+    const std::string name;
+    ros::Publisher pub;
 
   public:
-    DroneWatcher() = delete;
-    DroneWatcher(const std::string& droneName) 
-      : droneName(droneName)
+    DronePosePub(ros::NodeHandle& nh, const std::string& name, const std::string& topic) 
+        : name(name)
     {
+      pub = nh.advertise<geometry_msgs::PoseStamped>(topic, 1);
+    }
+
+    std::string getName() const { return name; }
+
+    void publish(geometry_msgs::Pose pose) const {
+      geometry_msgs::PoseStamped poseStamped;
+      poseStamped.header.stamp = ros::Time::now();
+      poseStamped.header.frame_id = "map";
+      poseStamped.pose = pose;
+
+      pub.publish(poseStamped);
     }
 };
 
-geometry_msgs::PoseStamped::ConstPtr poseMsg;
-
-void callback(const geometry_msgs::PoseStamped::ConstPtr pose) {
-  poseMsg = pose;
+gazebo_msgs::ModelStates::ConstPtr modelStatesMsg;
+void gazeboModelStatesCallback(gazebo_msgs::ModelStates::ConstPtr msg) {
+  modelStatesMsg = msg;
 }
 
 int main(int argc, char** argv) {
   ros::init(argc, argv, "mocap_node");
   ros::NodeHandle nh;
+  ros::Subscriber sub = nh.subscribe("/gazebo/model_states", 1, gazeboModelStatesCallback);
 
-  // Get drones from parameter server
-  //std::string droneName;
-  //std::string publishTopics;
+  //std::vector<std::string> droneNames = {"alpha", "bravo"};
+  std::vector<DronePosePub> dronePubs;
+  dronePubs.emplace_back(nh, "iris_1", "mavros/mocap/pose");
 
-  //if (!nh.getParam("drone_name", droneName)) {
-  //  ROS_ERROR("Unable to load parameter drone_name");
-  //}
-
-  //if (droneName.size() == 0) {
-  //  ROS_WARN("No drone name given");
-  //  return 1;
-  //}
-
-  //std::vector<DroneWatcher> droneWatchers;
-  //droneWatchers.emplace_back(droneName);
-
-
-  ROS_INFO("Subscribing to topic");
-  ros::Subscriber sub = nh.subscribe("mavros/local_position/pose", 1, callback);
-
-  ros::Rate rate(1);
-
-  ROS_INFO("Going into while loop");
+  ros::Rate rate(10);
   while (ros::ok()) {
-    if (poseMsg) {
-      ROS_INFO_STREAM("Position:" << poseMsg->pose.position);
+    ros::spinOnce();
+    rate.sleep();
+
+    if (!modelStatesMsg) {
+      continue;
     }
 
-
-    ROS_INFO_STREAM("ptr:" << poseMsg);
-
-    rate.sleep();
+    // extract dronePoses from msg
+    for (const auto& dronePub : dronePubs) {
+      const auto it = std::find(modelStatesMsg->name.cbegin(), modelStatesMsg->name.cend(), dronePub.getName());
+      if (it == modelStatesMsg->name.cend()) {
+        continue;
+      }
+      const size_t index = std::distance(modelStatesMsg->name.cbegin(), it);
+      dronePub.publish(modelStatesMsg->pose[index]);
+    }
   }
 
   return 0;
