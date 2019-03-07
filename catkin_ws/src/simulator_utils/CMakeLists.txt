@@ -9,6 +9,7 @@ add_compile_options(-std=c++11)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   ascend_utils
+  ascend_msgs
   gazebo_msgs
   geometry_msgs
   roscpp

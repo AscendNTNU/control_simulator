@@ -12,7 +12,7 @@
   <group ns="$(arg namespace)">
     <node name="fluid_fsm_client" pkg="fluid_fsm" type="test_client" output="screen"/>
 
-    <node name="mocap_publisher" pkg="simulator_utils" type="mocap_publisher_node" output="screen">
-   </node>
+    <node name="mocap_publisher" pkg="simulator_utils" type="mocap_publisher_node" output="screen"/>
+    <node name="obstacle_publisher" pkg="simulator_utils" type="obstacle_publisher_node" output="screen"/>
   </group>
 </launch>
