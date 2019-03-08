@@ -12,10 +12,11 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"
     ros-kinetic-mavros-extras \
     ros-kinetic-mavros-msgs \
     geographiclib-tools \
+    git \
     libeigen3-dev \
     libopencv-dev \
     libprotoc-dev \
-    git \
+    libtinyxml-dev \
     protobuf-compiler \
     python-pip \
   && rm -rf /var/lib/apt/lists/* \

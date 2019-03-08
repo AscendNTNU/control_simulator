@@ -1,5 +1,5 @@
 
-all: sitl-gazebo-plugins custom-gazebo-plugins iris-models 
+local: sitl-gazebo-plugins custom-gazebo-plugins iris-models 
 
 .PHONY:
 custom-gazebo-plugins:
@@ -28,14 +28,30 @@ iris-models:
 	./make_iris.sh 4
 
 .PHONY:
-build-images: sitl-gazebo-plugins custom-gazebo-plugins iris-models
+prebuild: sitl-gazebo-plugins custom-gazebo-plugins iris-models
+
+.PHONY:
+build-images: build-image-pcnode build-image-gzweb build-image-gzserver build-image-px4
+
+.PHONY:
+build-image-pcnode: prebuild
 	docker build -t ascendntnu/control_simulator_pc_node -f components/computer.dockerfile .
+
+.PHONY:
+build-image-gzweb: prebuild
 	docker build -t ascendntnu/gzweb --build-arg GZRESOURCES_DIR=gzresources -f components/gzweb.dockerfile .
+
+.PHONY:
+build-image-gzserver: prebuild
 	docker build -t ascendntnu/gzserver --build-arg GZRESOURCES_DIR=gzresources -f components/gzserver.dockerfile .
+
+.PHONY:
+build-image-px4: prebuild
 	docker build -t ascendntnu/px4 -f components/px4.dockerfile .
 
 .PHONY:
 upload-images: 
+	docker login
 	docker push ascendntnu/control_simulator_pc_node
 	docker push ascendntnu/gzweb
 	docker push ascendntnu/gzserver

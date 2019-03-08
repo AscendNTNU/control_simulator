@@ -4,3 +4,6 @@ gzresources/build
 gzresources/plugins
 gzresources/models/iris_*/*
 
+
+*.swp
+

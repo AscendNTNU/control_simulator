@@ -8,7 +8,7 @@ services:
   onboard_computer_1:
     image: ascendntnu/control_simulator_pc_node:latest
     container_name: onboard_computer_1
-    command: roslaunch --wait simulator_utils jetson.launch px4_addr:=px4_1
+    command: roslaunch --wait simulator_utils jetson.launch px4_addr:=px4_1 namespace:=alpha
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
     depends_on:
@@ -92,13 +92,13 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
     environment:
       - ROS_MASTER_URI=http://offboard_computer:11311
-      - WORLD_FILE=full_world.world
+      - WORLD_FILE=single_world.world
     logging:
       driver: none
-  mocap_node:
-    image: ascendntnu/control_simulator_pc_node:latest
-    container_name: mocap_node
-    command: roslaunch --wait simulator_utils mocap_node.launch 
-    environment:
-      - ROS_MASTER_URI=http://offboard_computer:11311
+      #  mocap_node:
+      #image: ascendntnu/control_simulator_pc_node:latest
+      #container_name: mocap_node
+      #command: rosrun simulator_utils mocap_publisher_node
+      #environment:
+      #  - ROS_MASTER_URI=http://offboard_computer:11311
 
