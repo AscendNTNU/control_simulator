@@ -17,5 +17,6 @@
 
     <node name="mocap_publisher" pkg="simulator_utils" type="mocap_publisher_node" output="screen"/>
     <node name="obstacle_publisher" pkg="simulator_utils" type="obstacle_publisher_node" output="screen"/>
+    <node name="target_publisher" pkg="simulator_utils" type="target_publisher_node" output="screen"/>
   </group>
 </launch>
