@@ -5,11 +5,14 @@
 
   <include file="$(find ascend_utils)/launch/jetson.launch">
     <arg name="namespace" value="$(arg namespace)"/>
-    <arg name="use_fluid_fsm" value="true"/>
-    <arg name="fluid_fsm_fcu_url" value="udp://$(env ROS_IP):14540@$(arg px4_addr):14557"/>
+    <arg name="use_fluid_fsm" value="false"/>
   </include>
 
   <group ns="$(arg namespace)">
+    <include file="$(find fluid_fsm)/launch/server_gazebo.launch">
+      <arg name="fcu_url" value="udp://$(env ROS_IP):14540@$(arg px4_addr):14557"/>
+    </include>
+
     <node name="fluid_fsm_client" pkg="fluid_fsm" type="test_client" output="screen"/>
 
     <node name="mocap_publisher" pkg="simulator_utils" type="mocap_publisher_node" output="screen"/>
