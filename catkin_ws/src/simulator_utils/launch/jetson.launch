@@ -13,8 +13,6 @@
       <arg name="fcu_url" value="udp://$(env ROS_IP):14540@$(arg px4_addr):14557"/>
     </include>
 
-    <node name="fluid_fsm_client" pkg="fluid_fsm" type="client_interval" output="screen"/>
-
     <node name="mocap_publisher" pkg="simulator_utils" type="mocap_publisher_node" output="screen"/>
     <node name="obstacle_publisher" pkg="simulator_utils" type="obstacle_publisher_node" output="screen"/>
     <node name="target_publisher" pkg="simulator_utils" type="target_publisher_node" output="screen"/>
