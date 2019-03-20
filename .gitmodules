@@ -1,6 +1,0 @@
-[submodule "components/sitl_gazebo"]
-	path = components/sitl_gazebo
-	url = https://github.com/AscendNTNU/sitl_gazebo.git
-[submodule "components/Ascend-PX4"]
-	path = components/Ascend-PX4
-	url = https://github.com/AscendNTNU/Ascend-PX4.git
