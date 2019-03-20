@@ -1,29 +1,7 @@
-FROM gazebo:libgazebo7
+FROM ros:kinetic
 
-# Install ros and build tools
-RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' \
-  && apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116 \
-  && apt-get update \
-  && apt-get install -y \
-    ros-kinetic-ros-base \
-    ros-kinetic-gazebo-ros \
-    ros-kinetic-mavlink \
-    ros-kinetic-mavros \
-    ros-kinetic-mavros-extras \
-    ros-kinetic-mavros-msgs \
-    geographiclib-tools \
-    git \
-    libeigen3-dev \
-    libopencv-dev \
-    libprotoc-dev \
-    libtinyxml-dev \
-    protobuf-compiler \
-    python-pip \
-  && rm -rf /var/lib/apt/lists/* \
-  && python -m pip install jinja2 \
-  && rosdep init \
-  && rosdep update 
 
-WORKDIR /root/control_simulator
-COPY . .
-ENTRYPOINT [ "./scripts/builder_entrypoint.sh" ]
+WORKDIR /root/control_simulator/catkin_ws/src
+COPY components .
+
+CMD bash
