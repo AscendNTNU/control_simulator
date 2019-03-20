@@ -30,19 +30,15 @@ void setBuildStatus(String message, String context, String state) {
 
 pipeline {
     agent any
+    environment {
+      GITHUB_PAT = credentials('227fd6ff-4a49-40da-98d4-f6da7987f068')
+    }
     stages {
         stage('Compilation') {
             steps {
-              withCredentials([string(credentialsId: '227fd6ff-4a49-40da-98d4-f6da7987f068', variable: 'TOKEN')]) {
-                sh "docker build -t ${env.JOB_NAME}:${env.GIT_COMMIT} --build-arg GITHUB_PAT=$TOKEN .".toLowerCase().replace("%2f", "/")
-              }
+              sh "docker build -t ${env.JOB_NAME}:${env.GIT_COMMIT} --build-arg GITHUB_PAT=${GITHUB_PAT} .".toLowerCase().replace("%2f", "/")
             }
         }
-        // stage('Unit Tests') {
-        //     steps {
-        //         sh "docker run ${env.JOB_NAME}:${env.GIT_COMMIT} /ros_entrypoint.sh tests".toLowerCase().replace("%2f", "/")
-        //     }
-        // }
     }
     post {
         success {
