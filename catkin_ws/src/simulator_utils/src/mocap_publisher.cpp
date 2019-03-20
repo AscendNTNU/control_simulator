@@ -37,7 +37,7 @@ void gazeboModelStatesCallback(gazebo_msgs::ModelStates::ConstPtr msg) {
 int main(int argc, char** argv) {
   ros::init(argc, argv, "mocap_node");
   ros::NodeHandle nh;
-  ros::Subscriber sub = nh.subscribe("gazebo/model_states", 1, gazeboModelStatesCallback);
+  ros::Subscriber sub = nh.subscribe("/gazebo/model_states", 1, gazeboModelStatesCallback);
 
   //std::vector<std::string> droneNames = {"alpha", "bravo"};
   std::vector<DronePosePub> dronePubs;
