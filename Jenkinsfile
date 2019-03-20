@@ -34,7 +34,7 @@ pipeline {
         stage('Compilation') {
             steps {
               withCredentials([string(credentialsId: '227fd6ff-4a49-40da-98d4-f6da7987f068', variable: 'TOKEN')]) {
-                sh "docker build -t ${env.JOB_NAME}:${env.GIT_COMMIT} --build-arg GITHUP_PAT=$TOKEN .".toLowerCase().replace("%2f", "/")
+                sh "docker build -t ${env.JOB_NAME}:${env.GIT_COMMIT} --build-arg GITHUB_PAT=$TOKEN .".toLowerCase().replace("%2f", "/")
               }
             }
         }
