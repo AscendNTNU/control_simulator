@@ -3,12 +3,7 @@ pipeline {
   stages {
     stage('build-images') {
       steps {
-        sh './scripts/build_images.sh'
-      }
-    }
-    stage('upload-images') {
-      steps {
-        sh 'make upload-images'
+        sh 'echo "not doing much here"'
       }
     }
   }

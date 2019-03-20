@@ -1,0 +1,7 @@
+[submodule "src/sitl_gazebo"]
+	path = src/sitl_gazebo
+	url = https://github.com/AscendNTNU/sitl_gazebo.git
+[submodule "src/px4"]
+	path = src/px4
+	url = https://github.com/PX4/Firmware.git
+  branch = f13bbacd5277123d6af2cb5ed21587c220031353
