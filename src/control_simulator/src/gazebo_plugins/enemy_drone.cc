@@ -62,7 +62,7 @@ namespace gazebo
 
               ignition::math::Vector3d vel = Kp*ignition::math::Vector3d{x_goal - x_curr, y_goal - y_curr, altitude - z_curr};
               if (vel.Length() > speed) {
-                vel = speed*vel.Normalized();
+                vel = speed*vel.Normalize();
               }
 
               this->model->SetLinearVel(vel);

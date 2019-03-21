@@ -36,7 +36,7 @@ pipeline {
     stages {
         stage('Compilation') {
             steps {
-              sh "docker build -t ${env.JOB_NAME}:${env.GIT_COMMIT} --build-arg GITHUB_PAT=${GITHUB_PAT} .".toLowerCase().replace("%2f", "/")
+              sh "docker build -t ${env.JOB_NAME}:${env.GIT_COMMIT} --build-arg GITHUB_PAT=$GITHUB_PAT .".toLowerCase().replace("%2f", "/")
             }
         }
     }

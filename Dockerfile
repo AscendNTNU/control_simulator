@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
 		imagemagick \
 		libboost-all-dev \
 		libeigen3-dev \
+		libgazebo7 \
 		libgazebo7-dev \
 		libjansson-dev \
 		libopencv-dev \
