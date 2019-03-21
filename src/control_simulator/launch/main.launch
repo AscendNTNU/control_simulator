@@ -11,10 +11,9 @@
   <!-- Simulator backend -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="verbose" value="$(arg gz_verbose)"/>
-    <arg name="world_name" value=""/>
+    <arg name="world_name" value="$(arg world_name)"/>
     <arg name="paused" value="false"/>
     <arg name="gui" value="false"/>
-    <arg name="headless" value="true"/>
   </include>
 
 <!--
