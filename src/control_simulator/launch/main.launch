@@ -1,0 +1,33 @@
+<launch>
+  <env name="GAZEBO_PLUGIN_PATH" value="$(optenv GAZEBO_PLUGIN_PATH):$(find control_simulator)/../../../devel/lib"/>
+  <env name="GAZEBO_MODEL_PATH" value="$(optenv GAZEBO_MODEL_PATH):$(find control_simulator)/models"/>
+
+  <arg name="gz_verbose" default="false"/>
+  <arg name="gzweb_start" default="true"/>
+  <arg name="gzweb_dir" default="$(env HOME)/gzweb"/>
+  <arg name="gzweb_port" default="8080"/>
+  <arg name="world_name" default="$(find control_simulator)/worlds/single_world.world"/>
+
+  <!-- Simulator backend -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="verbose" value="$(arg gz_verbose)"/>
+    <arg name="world_name" value=""/>
+    <arg name="paused" value="false"/>
+    <arg name="gui" value="false"/>
+    <arg name="headless" value="true"/>
+  </include>
+
+<!--
+  <include file="$(find px4)/launch/px4.launch">
+    <arg name="est" value="lpe"/>
+    <arg name="interactive" value="false"/>
+  </include>
+
+  <include file="$(find mavros)/launch/px4.launch">
+    <arg name="fcu_url" value="udp://:14540@localhost:14557"/>
+  </include>
+  <node name="positioning_node" pkg="simulator" type="mocap_node" output="screen"/>
+-->
+
+  <node if="$(arg gzweb_start)" respawn="true" name="gzweb_node" pkg="control_simulator" type="gzweb.sh" args="$(arg gzweb_dir) $(arg gzweb_port)"/>
+</launch>

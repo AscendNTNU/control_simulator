@@ -4,6 +4,7 @@ ARG GITHUB_PAT
 
 RUN apt-get update && apt-get install -y \
 		curl \
+		gazebo7 \
 		imagemagick \
 		libboost-all-dev \
 		libeigen3-dev \

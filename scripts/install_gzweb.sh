@@ -8,8 +8,8 @@ hg clone https://bitbucket.org/osrf/gzweb
 
 curl -sL https://deb.nodesource.com/setup_8.x >> setup_8.sh
 chmod +x setup_8.sh
-sudo ./setup_8.sh
-sudo apt-get install -y nodejs
+./setup_8.sh
+apt-get install -y nodejs
 rm setup_8.sh
 
 export GAZEBO_MODEL_PATH=$modeldir
