@@ -31,15 +31,14 @@ RUN apt-get update && apt-get install -y \
     . /opt/ros/kinetic/setup.sh && \
     rosrun mavros install_geographiclib_datasets.sh
     
-
 RUN apt-get install -y python-pip && \
     python -m pip install --upgrade pip && \
     python -m pip install --user toml numpy
 
 WORKDIR /control_simulator
 COPY . . 
+RUN bash scripts/install_gzweb.sh
 RUN git submodule update --init --recursive
-
 
 # Get external projects
 RUN git clone https://${GITHUB_PAT}:@github.com/AscendNTNU/ascend_utils.git src/ascend_utils && \
