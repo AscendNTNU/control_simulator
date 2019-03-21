@@ -31,7 +31,7 @@ void setBuildStatus(String message, String context, String state) {
 pipeline {
     agent any
     environment {
-      GITHUB_PAT = credentials('227fd6ff-4a49-40da-98d4-f6da7987f068')
+      GITHUB_PAT = credentials('45349698-76f9-4d4b-bf43-e744658258af')
     }
     stages {
         stage('Compilation') {
