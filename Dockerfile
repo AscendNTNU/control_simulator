@@ -37,8 +37,11 @@ RUN apt-get install -y python-pip && \
     python -m pip install --user toml numpy
 
 WORKDIR /control_simulator
-COPY . . 
+COPY scripts scripts
+COPY src/control_simulator/models src/control_simulator/models
 RUN bash scripts/install_gzweb.sh
+
+COPY . .
 RUN git submodule update --init --recursive
 
 # Get external projects
@@ -47,4 +50,5 @@ RUN git clone https://${GITHUB_PAT}:@github.com/AscendNTNU/ascend_utils.git src/
     git clone https://${GITHUB_PAT}:@github.com/AscendNTNU/ascend_msgs.git src/ascend_msgs
 RUN bash -c "source /opt/ros/kinetic/setup.bash && catkin_make"
 
+ENTRYPOINT ["./entrypoint.sh"]
 CMD bash

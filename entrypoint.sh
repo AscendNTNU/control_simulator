@@ -9,4 +9,4 @@ source $(dpkg -L gazebo7 | grep gazebo/setup.sh)
 source /opt/ros/kinetic/setup.bash
 source devel/setup.bash
 
-
+exec $@
