@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(simulator_utils)
+project(control_simulator)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
@@ -8,9 +8,11 @@ add_compile_options(-std=c++11)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  ascend_utils
   ascend_msgs
+  gazebo_dev
+  gazebo_ros
   gazebo_msgs
+  mavros_msgs
   geometry_msgs
   roscpp
 )
@@ -118,8 +120,10 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
+  ${GAZEBO_INCLUDE_DIRS}
+  ${GAZEBO_MSG_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -137,7 +141,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(obstacle_publisher_node src/obstacle_publisher.cpp)
 add_executable(target_publisher_node src/target_publisher.cpp)
-add_executable(mocap_publisher_node src/mocap_publisher.cpp)
+add_executable(positioning_node  src/mocap_publisher.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -149,12 +153,19 @@ add_executable(mocap_publisher_node src/mocap_publisher.cpp)
 ## same as for the library above
 add_dependencies(obstacle_publisher_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(target_publisher_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(mocap_publisher_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(positioning_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(obstacle_publisher_node ${catkin_LIBRARIES})
 target_link_libraries(target_publisher_node ${catkin_LIBRARIES})
-target_link_libraries(mocap_publisher_node ${catkin_LIBRARIES})
+target_link_libraries(positioning_node  ${catkin_LIBRARIES})
+
+
+include_directories(SYSTEM ${GAZEBO_INCLUDE_DIRS})
+link_directories(${GAZEBO_LIBRARY_DIRS})
+#list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
+add_library(enemy_drone SHARED src/gazebo_plugins/enemy_drone.cc)
+target_link_libraries(enemy_drone ${gazebo_LIBRARIES})
 
 #############
 ## Install ##
