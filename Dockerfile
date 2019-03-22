@@ -1,7 +1,5 @@
 FROM ros:kinetic
 
-ARG GITHUB_PAT
-
 RUN apt-get update && apt-get install -y \
 		curl \
 		gazebo7 \
@@ -45,9 +43,9 @@ COPY . .
 RUN git submodule update --init --recursive
 
 # Get external projects
-RUN git clone https://${GITHUB_PAT}:@github.com/AscendNTNU/ascend_utils.git src/ascend_utils && \
-    git clone https://${GITHUB_PAT}:@github.com/AscendNTNU/fluid_fsm.git src/fluid_fsm && \
-    git clone https://${GITHUB_PAT}:@github.com/AscendNTNU/ascend_msgs.git src/ascend_msgs
+ARG GITHUB_PAT
+RUN bash scripts/clone_external_projects.sh ${GITHUB_PAT}
+
 RUN bash -c "source /opt/ros/kinetic/setup.bash && catkin_make"
 
 ENTRYPOINT ["./entrypoint.sh"]
