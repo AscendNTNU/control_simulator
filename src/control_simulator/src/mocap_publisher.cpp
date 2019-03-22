@@ -4,6 +4,7 @@
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/Pose.h>
 #include <gazebo_msgs/ModelStates.h>
+#include <mavros_msgs/WaypointList.h>
 
 class DronePosePub {
   private:
@@ -38,6 +39,8 @@ int main(int argc, char** argv) {
   ros::init(argc, argv, "mocap_node");
   ros::NodeHandle nh;
   ros::Subscriber sub = nh.subscribe("/gazebo/model_states", 1, gazeboModelStatesCallback);
+  ros::topic::waitForMessage<mavros_msgs::WaypointList>("mavros/mission/waypoints");
+  
 
   //std::vector<std::string> droneNames = {"alpha", "bravo"};
   std::vector<DronePosePub> dronePubs;

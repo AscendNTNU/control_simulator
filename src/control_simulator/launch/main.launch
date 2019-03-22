@@ -19,16 +19,10 @@
   <node if="$(eval arg('client') == 'gzweb')" respawn="true" name="gzweb_node" pkg="control_simulator" type="gzweb.sh" args="$(arg gzweb_dir) $(arg gzweb_port)"/>
 
   <include file="$(find px4)/launch/px4.launch">
-    <arg name="ID" value="1"/>
+    <arg name="ID" value="0"/>
     <arg name="est" value="lpe"/>
     <arg name="interactive" value="false"/>
   </include>
 
-  <!--
-  <include file="$(find mavros)/launch/px4.launch">
-    <arg name="fcu_url" value="udp://localhost:14540@localhost:14557"/>
-  </include>
-  -->
   <node name="positioning_node" pkg="control_simulator" type="positioning_node" output="screen"/>
-
 </launch>
