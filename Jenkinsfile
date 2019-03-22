@@ -30,13 +30,10 @@ void setBuildStatus(String message, String context, String state) {
 
 pipeline {
     agent any
-    environment {
-      GITHUB_PAT = credentials('45349698-76f9-4d4b-bf43-e744658258af')
-    }
     stages {
         stage('Compilation') {
             steps {
-              sh "docker build -t ${env.JOB_NAME}:${env.GIT_COMMIT} --build-arg GITHUB_PAT=${GITHUB_PAT} .".toLowerCase().replace("%2f", "/")
+              sh "docker build -t ${env.JOB_NAME}:${env.GIT_COMMIT} .".toLowerCase().replace("%2f", "/")
             }
         }
     }
