@@ -9,7 +9,7 @@ This repository is set up as a ROS package. Clone it into your catkin workspace.
 git clone --recursive https://github.com/AscendNTNU/control_simulator.git
 
 # Or use this:
-git clone --recursive https://github.com/AscendNTNU/control_simulator.git
+git clone https://github.com/AscendNTNU/control_simulator.git
 cd control_simulator
 git submodule update --init --recursive
 ```
