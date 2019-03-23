@@ -1,7 +1,0 @@
-<launch>
-  <!-- Simulator -->
-<!--
-  <node name="obstacle_publisher" pkg="simulator_utils" type="obstacle_publisher_node"/>
--->
-</launch>
-

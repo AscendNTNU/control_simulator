@@ -18,6 +18,7 @@
   </include>
   <node if="$(eval arg('client') == 'gzweb')" respawn="true" name="gzweb_node" pkg="control_simulator" type="gzweb.sh" args="$(arg gzweb_dir) $(arg gzweb_port)"/>
 
+  <!-- PX4 launch -->
   <include file="$(find px4)/launch/px4.launch">
     <arg name="ID" value="0"/>
     <arg name="est" value="lpe"/>
