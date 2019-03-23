@@ -21,6 +21,8 @@ RUN apt-get update && apt-get install -y \
     python-jinja2 \
     python-rospkg \
     ros-kinetic-cv-bridge \
+    ros-kinetic-libmavconn \
+    ros-kinetic-mavlink \
     ros-kinetic-mavros \
     ros-kinetic-mavros-msgs \
     ros-kinetic-mavros-extras \
