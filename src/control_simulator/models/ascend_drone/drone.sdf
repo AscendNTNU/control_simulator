@@ -96,7 +96,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <scale>1 1 1</scale>
+            <scale>0.8 0.8 1</scale>
             <uri>model://ascend_drone/meshes/iris_prop_ccw.dae</uri>
           </mesh>
         </geometry>
@@ -144,7 +144,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <scale>1 1 1</scale>
+            <scale>0.8 0.8 1</scale>
             <uri>model://ascend_drone/meshes/iris_prop_ccw.dae</uri>
           </mesh>
         </geometry>
@@ -192,7 +192,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <scale>1 1 1</scale>
+            <scale>0.8 0.8 1</scale>
             <uri>model://ascend_drone/meshes/iris_prop_cw.dae</uri>
           </mesh>
         </geometry>
@@ -240,7 +240,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <scale>1 1 1</scale>
+            <scale>0.8 0.8 1</scale>
             <uri>model://ascend_drone/meshes/iris_prop_cw.dae</uri>
           </mesh>
         </geometry>
