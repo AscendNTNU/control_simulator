@@ -1,0 +1,5 @@
+- git:
+    local-name: mavros
+    uri: https://github.com/mavlink/mavros.git
+    version: 0.26.1
+
