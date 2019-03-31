@@ -18,7 +18,7 @@ git submodule update --init --recursive
 After installing into the catkin workspace, build and source it using standard ROS procedures.
 ```bash
 catkin build    # catkin_make should also work fine
-source devel/setup.zsh
+source devel/setup.bash
 ```
 
 ### Run simulator
