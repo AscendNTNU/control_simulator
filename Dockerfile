@@ -18,23 +18,27 @@ RUN apt-get update && apt-get install -y \
 		pkg-config \
 		protobuf-compiler \
 		psmisc \
+    python-catkin-tools \
     python-jinja2 \
     python-rospkg \
+    python-rosinstall-generator \
+    ros-kinetic-angles \
     ros-kinetic-cv-bridge \
-    ros-kinetic-libmavconn \
-    ros-kinetic-mavlink \
-    ros-kinetic-mavros \
-    ros-kinetic-mavros-msgs \
-    ros-kinetic-mavros-extras \
+    ros-kinetic-control-toolbox \
     ros-kinetic-gazebo-ros \
     ros-kinetic-gazebo-msgs \
+    ros-kinetic-libmavconn \
+    ros-kinetic-tf2-eigen \
+    ros-kinetic-urdf \
 		xvfb && \
-    . /opt/ros/kinetic/setup.sh && \
-    rosrun mavros install_geographiclib_datasets.sh
-    
+    # install mavros dependencies so we can build from source
+    apt-get install -y \
+    $(apt-cache depends ros-kinetic-mavros | grep Depends | sed "s/.*ends://" | tr '\n' ' ') \ 
+    $(apt-cache depends ros-kinetic-mavlink | grep Depends | sed "s/.*ends://" | tr '\n' ' ') 
+
 RUN apt-get install -y python-pip && \
     python -m pip install --upgrade pip && \
-    python -m pip install --user toml numpy
+    python -m pip install --user toml numpy future
 
 WORKDIR /control_simulator
 COPY scripts scripts
@@ -48,7 +52,7 @@ RUN git submodule update --init --recursive
 ARG GITHUB_PAT
 RUN bash scripts/clone_external_projects.sh ${GITHUB_PAT}
 
-RUN bash -c "source /opt/ros/kinetic/setup.bash && catkin_make"
+RUN bash -c "source /opt/ros/kinetic/setup.bash && catkin build"
 
 ENTRYPOINT ["./entrypoint.sh"]
 CMD bash
