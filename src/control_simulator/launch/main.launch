@@ -6,7 +6,7 @@
   <arg name="client" default="gzclient"/>
   <arg name="gzweb_dir" default="$(env HOME)/gzweb"/>
   <arg name="gzweb_port" default="8080"/>
-  <arg name="world_name" default="$(find control_simulator)/worlds/single_world.world"/>
+  <arg name="world_name" default="$(find control_simulator)/worlds/default.world"/>
 
   <!-- Simulator backend -->
   <arg name="gz_gui" value="$(eval arg('client') == 'gzclient')"/>
