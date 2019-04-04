@@ -1,0 +1,5 @@
+<launch>
+    <include file="$(find control_simulator)/launch/main.launch">
+        <arg name="world_name" value="$(find control_simulator)/worlds/four.world"/>
+    </include>
+</launch>

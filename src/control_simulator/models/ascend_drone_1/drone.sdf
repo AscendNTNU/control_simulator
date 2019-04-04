@@ -1,5 +1,5 @@
 <sdf version='1.6'>
-  <model name='ascend_drone'>
+  <model name='ascend_drone_1'>
     <link name='base_link'>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <inertial>
