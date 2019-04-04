@@ -1,5 +1,5 @@
 <sdf version='1.6'>
-  <model name='ascend_drone_1'>
+  <model name='ascend_drone_3'>
     <link name='base_link'>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <inertial>
@@ -352,9 +352,9 @@
       <imuSubTopic>/imu</imuSubTopic>
       <gpsSubTopic>/gps</gpsSubTopic>
       <mavlink_addr>INADDR_ANY</mavlink_addr>
-      <mavlink_udp_port>14561</mavlink_udp_port>
+      <mavlink_udp_port>14563</mavlink_udp_port>
       <use_tcp>true</use_tcp>
-      <mavlink_tcp_port>4561</mavlink_tcp_port>
+      <mavlink_tcp_port>4563</mavlink_tcp_port>
       <serialEnabled>false</serialEnabled>
       <serialDevice>/dev/ttyACM0</serialDevice>
       <baudRate>921600</baudRate>

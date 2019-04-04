@@ -27,13 +27,5 @@
       <arg name="px4_id" value="2"/>
       <arg name="namespace" value="drone_2"/>
   </include>
-  <include file="$(find control_simulator)/launch/drone_backend.launch">
-      <arg name="px4_id" value="3"/>
-      <arg name="namespace" value="drone_3"/>
-  </include>
-  <include file="$(find control_simulator)/launch/drone_backend.launch">
-      <arg name="px4_id" value="4"/>
-      <arg name="namespace" value="drone_4"/>
-  </include>
 </launch>
 

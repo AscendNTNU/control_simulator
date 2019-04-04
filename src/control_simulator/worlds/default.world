@@ -11,7 +11,7 @@
       <uri>model://basketball_floor</uri>
     </include>
     <include>
-      <uri>model://ascend_drone</uri>
+      <uri>model://ascend_drone_1</uri>
       <pose>0.0 0.0 0.83 0 0 0</pose>
     </include>
     <include>
