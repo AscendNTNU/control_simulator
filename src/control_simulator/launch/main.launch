@@ -23,5 +23,4 @@
       <arg name="px4_id" value="1"/>
       <arg name="namespace" value="drone_1"/>
   </include>
-
 </launch>
