@@ -5,6 +5,7 @@
 #include <geometry_msgs/Pose.h>
 #include <gazebo_msgs/ModelStates.h>
 #include <mavros_msgs/WaypointList.h>
+#include <mavros_msgs/ParamSet.h>
 
 class DronePosePub {
   private:
@@ -51,6 +52,13 @@ int main(int argc, char** argv) {
 
   ros::Subscriber sub = nh.subscribe("/gazebo/model_states", 1, gazeboModelStatesCallback);
   ros::topic::waitForMessage<mavros_msgs::WaypointList>("mavros/mission/waypoints");
+  ros::ServiceClient mavparam = nh.serviceClient<mavros_msgs::ParamSet>("mavros/param/set");
+  mavros_msgs::ParamSet ps;
+  ps.request.param_id = "EKF2_AID_MASK";
+  ps.request.value.integer = 24; // vision_pose and vision_yaw fusion
+  if (!mavparam.call(ps) || !ps.response.success) {
+      ROS_WARN("Failed to set %s, please set manually to %ld to get global positioning", ps.request.param_id.c_str(), ps.request.value.integer);
+  }
   
   //std::vector<std::string> droneNames = {"alpha", "bravo"};
   std::vector<DronePosePub> dronePubs;
