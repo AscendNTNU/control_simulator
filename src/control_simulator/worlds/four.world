@@ -27,22 +27,22 @@
       <pose>4.0 -8.0 0.83 0 0 0</pose>
     </include>
     <include>
-      <uri>model://danger_sphere_obstacle</uri>
+      <uri>model://enemy_drone</uri>
       <name>obstacle_1</name>
       <pose>5.0 10.0 2.5 0 0 0</pose>
     </include>
     <include>
-      <uri>model://danger_sphere_obstacle</uri>
+      <uri>model://enemy_drone</uri>
       <name>obstacle_2</name>
       <pose>2.5 10.0 2.5 0 0 0</pose>
     </include>
     <include>
-      <uri>model://danger_sphere_obstacle</uri>
+      <uri>model://enemy_drone</uri>
       <name>obstacle_3</name>
       <pose>-2.5 10.0 2.5 0 0 0</pose>
     </include>
     <include>
-      <uri>model://danger_sphere_obstacle</uri>
+      <uri>model://enemy_drone</uri>
       <name>obstacle_4</name>
       <pose>-5.0 10.0 2.5 0 0 0</pose>
     </include>
