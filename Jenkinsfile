@@ -13,13 +13,13 @@
 //   return readFile(".git/current-commit").trim()
 // }
 
-void setBuildStatus(String message, String context, String state) {
+void setBuildStatus(String message, String context, String state, String gitcommitHash) {
     withCredentials([string(credentialsId: '227fd6ff-4a49-40da-98d4-f6da7987f068', variable: 'TOKEN')]) {
       // 'set -x' for debugging. Don't worry the access token won't be actually logged
       // Also, the sh command actually executed is not properly logged, it will be further escaped when written to the log
         sh """
             set -x
-            curl \"https://api.github.com/repos/org/repo/statuses/$GIT_COMMIT?access_token=$TOKEN\" \
+            curl \"https://api.github.com/repos/org/repo/statuses/$gitcommitHash?access_token=$TOKEN\" \
                 -H \"Content-Type: application/json\" \
                 -X POST \
                 -d \"{\\\"description\\\": \\\"$message\\\", \\\"state\\\": \\\"$state\\\", \\\"context\\\": \\\"$context\\\", \\\"target_url\\\": \\\"$BUILD_URL\\\"}\"
@@ -39,10 +39,10 @@ pipeline {
     }
     post {
         success {
-            setBuildStatus("Build complete", "compile", "success")
+            setBuildStatus("Build complete", "compile", "success", ${env.GIT_COMMIT})
         }
         failure {
-            setBuildStatus("Failed", "pl-compile", "failure")
+            setBuildStatus("Failed", "pl-compile", "failure", ${env.GIT_COMMIT})
         }
     }
 }
