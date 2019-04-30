@@ -31,13 +31,6 @@ void setBuildStatus(String message, String context, String state) {
 pipeline {
     agent any
     stages {
-        stage('Debug') {
-            steps {
-                script {
-                    env.each{ println it }    
-                }
-            }
-        }
         stage('Compilation') {
             steps {
               
