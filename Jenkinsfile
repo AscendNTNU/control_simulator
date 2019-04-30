@@ -39,10 +39,10 @@ pipeline {
     }
     post {
         success {
-            setBuildStatus("Build complete", "compile", "success", ${env.GIT_COMMIT})
+            setBuildStatus("Build complete", "compile", "success", "${env.GIT_COMMIT}")
         }
         failure {
-            setBuildStatus("Failed", "pl-compile", "failure", ${env.GIT_COMMIT})
+            setBuildStatus("Failed", "pl-compile", "failure", "${env.GIT_COMMIT}")
         }
     }
 }
