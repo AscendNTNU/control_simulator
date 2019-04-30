@@ -1,0 +1,14 @@
+material RepeatedTexture
+{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture ../textures/moss.jpeg
+                scale 0.5 0.5
+            }
+        }
+    }
+}

@@ -27,24 +27,51 @@
       <pose>4.0 -8.0 0.83 0 0 0</pose>
     </include>
     <include>
-      <uri>model://enemy_drone</uri>
+      <uri>model://danger_sphere_obstacle</uri>
       <name>obstacle_1</name>
       <pose>5.0 10.0 2.5 0 0 0</pose>
     </include>
     <include>
-      <uri>model://enemy_drone</uri>
+      <uri>model://danger_sphere_obstacle</uri>
       <name>obstacle_2</name>
       <pose>2.5 10.0 2.5 0 0 0</pose>
     </include>
     <include>
-      <uri>model://enemy_drone</uri>
+      <uri>model://danger_sphere_obstacle</uri>
       <name>obstacle_3</name>
       <pose>-2.5 10.0 2.5 0 0 0</pose>
     </include>
     <include>
-      <uri>model://enemy_drone</uri>
+      <uri>model://danger_sphere_obstacle</uri>
       <name>obstacle_4</name>
       <pose>-5.0 10.0 2.5 0 0 0</pose>
+    </include>
+
+    <!-- walls and shelters -->
+    <include>
+      <uri>model://arena_wall</uri>
+      <name>wall_1</name>
+      <pose>6.55 0.0 0.7 0 0 1.57</pose>
+    </include>
+    <include>
+      <uri>model://arena_wall</uri>
+      <name>wall_2</name>
+      <pose>-6.55 0.0 0.7 0 0 1.57</pose>
+    </include>
+    <include>
+      <uri>model://Wall90Degree</uri>
+      <name>wall90_1</name>
+      <pose>-2.77 -0.48 0.46 0 0 -2.1</pose>
+    </include>
+    <include>
+      <uri>model://Wall90Degree</uri>
+      <name>wall90_2</name>
+      <pose>2.98 -4.9 0.46 0 0 -0.77</pose>
+    </include>
+    <include>
+      <uri>model://shelter</uri>
+      <name>shelter_1</name>
+      <pose>2.12 0.04 0.97 0 0 -0.87</pose>
     </include>
 
 	<scene>
