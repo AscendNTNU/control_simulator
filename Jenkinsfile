@@ -33,7 +33,9 @@ pipeline {
     stages {
         stage('Debug') {
             steps {
-                env.each{ println it }
+                script {
+                    env.each{ println it }    
+                }
             }
         }
         stage('Compilation') {
