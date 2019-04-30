@@ -9,6 +9,13 @@
         </geometry>
       </collision>
       <visual name="visual">
+        <cast_shadows>true</cast_shadows>
+        <material>
+            <script>
+                <uri>file://media/materials/scripts/gazebo.material</uri>
+                <name>Gazebo/Orange</name>
+            </script>
+        </material>
         <geometry>
           <sphere>
             <radius>0.15</radius>

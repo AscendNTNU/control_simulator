@@ -54,32 +54,89 @@
           </mesh>
         </geometry>
       </visual>
-      <visual name="propeller_rr">
+    </link>
+    
+    <link name="propeller_rr">
         <pose>-0.09035 -0.11423 -0.00501 0 0 0</pose>
+      <visual name="propeller_rr">
         <geometry>
           <mesh>
             <uri>model://parrot_bebop_2/meshes/propeller_rr.dae</uri>
           </mesh>
         </geometry>
       </visual>
-      <visual name="propeller_rl">
+    </link>
+    <joint name='rr_joint' type='revolute'>
+      <child>propeller_rr</child>
+      <parent>body</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name="propeller_rl">
         <pose>-0.09035 0.11452 -0.00501 0 0 0</pose>
+      <visual name="propeller_rl">
         <geometry>
           <mesh>
             <uri>model://parrot_bebop_2/meshes/propeller_rl.dae</uri>
           </mesh>
         </geometry>
       </visual>
-      <visual name="propeller_fr">
+    </link>
+    <joint name='rl_joint' type='revolute'>
+      <child>propeller_rl</child>
+      <parent>body</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name="propeller_fr">
         <pose>0.08456 -0.11435 -0.00501 0 0 0</pose>
+      <visual name="propeller_fr">
         <geometry>
           <mesh>
             <uri>model://parrot_bebop_2/meshes/propeller_fr.dae</uri>
           </mesh>
         </geometry>
       </visual>
-      <visual name="propeller_fl">
+    </link>
+    <joint name='fr_joint' type='revolute'>
+      <child>propeller_fr</child>
+      <parent>body</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name="propeller_fl">
         <pose>0.08456 0.11463 -0.00501 0 0 0</pose>
+      <visual name="propeller_fl">
         <geometry>
           <mesh>
             <uri>model://parrot_bebop_2/meshes/propeller_fl.dae</uri>
@@ -87,11 +144,31 @@
         </geometry>
       </visual>
     </link>
+    <joint name='fl_joint' type='revolute'>
+      <child>propeller_fl</child>
+      <parent>body</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    
     <plugin name="enemy_drone" filename="libenemy_drone.so">
       <x_min>-7.5</x_min>
       <x_max>7.5</x_max>
       <y_min>-11.5</y_min>
       <y_max>11.5</y_max>
     </plugin>
+    <!--
+    <plugin name="parrot" filename="libparrot.so"/>
+    -->
   </model>
 </sdf>
