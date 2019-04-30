@@ -35,6 +35,13 @@
       <pose>-5.0 10.0 2.5 0 0 0</pose>
     </include>
 
+	<scene>
+		<sky>
+			<clouds>
+				<speed>12</speed>
+			</clouds>
+		</sky>
+	</scene>
 
     <physics name='default_physics' default='0' type='ode'>
       <gravity>0 0 -9.8066</gravity>
