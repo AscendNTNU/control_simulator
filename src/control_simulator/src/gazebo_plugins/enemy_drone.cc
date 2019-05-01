@@ -18,7 +18,10 @@ namespace gazebo
               y_min = _sdf->GetElement("y_min")->Get<float>();
               y_max = _sdf->GetElement("y_max")->Get<float>();
 
+              const float z_curr = this->model->GetWorldPose().pos.z;
+              altitude = z_curr;
               if (_sdf->HasElement("altitude")) {
+                  // override if altitude is specified
                 altitude = _sdf->GetElement("altitude")->Get<float>();
               }
 
