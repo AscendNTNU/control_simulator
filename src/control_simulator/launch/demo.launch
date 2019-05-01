@@ -1,0 +1,39 @@
+<launch>
+  <env name="GAZEBO_PLUGIN_PATH" value="$(optenv GAZEBO_PLUGIN_PATH):$(find control_simulator)/../../../devel/lib"/>
+  <env name="GAZEBO_MODEL_PATH" value="$(optenv GAZEBO_MODEL_PATH):$(find control_simulator)/models"/>
+
+  <arg name="gz_verbose" default="false"/>
+  <arg name="client" default="gzclient"/>
+  <arg name="gzweb_dir" default="$(env HOME)/gzweb"/>
+  <arg name="gzweb_port" default="8080"/>
+  <arg name="world_name" default="$(find control_simulator)/worlds/demo.world"/>
+
+  <!-- Simulator backend -->
+  <arg name="gz_gui" value="$(eval arg('client') == 'gzclient')"/>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="verbose" value="$(arg gz_verbose)"/>
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="paused" value="false"/>
+    <arg name="gui" value="$(arg gz_gui)"/>
+  </include>
+  <node if="$(eval arg('client') == 'gzweb')" respawn="true" name="gzweb_node" pkg="control_simulator" type="gzweb.sh" args="$(arg gzweb_dir) $(arg gzweb_port)"/>
+  
+  <!-- Drone backends -->
+  <include file="$(find control_simulator)/launch/drone_backend.launch">
+      <arg name="px4_id" value="1"/>
+      <arg name="namespace" value="drone_1"/>
+  </include>
+  <include file="$(find control_simulator)/launch/drone_backend.launch">
+      <arg name="px4_id" value="2"/>
+      <arg name="namespace" value="drone_2"/>
+  </include>
+  <include file="$(find control_simulator)/launch/drone_backend.launch">
+      <arg name="px4_id" value="3"/>
+      <arg name="namespace" value="drone_3"/>
+  </include>
+  <include file="$(find control_simulator)/launch/drone_backend.launch">
+      <arg name="px4_id" value="4"/>
+      <arg name="namespace" value="drone_4"/>
+  </include>
+</launch>
+
