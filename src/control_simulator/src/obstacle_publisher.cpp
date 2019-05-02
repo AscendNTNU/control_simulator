@@ -58,8 +58,8 @@ int main(int argc, char** argv) {
         q_pose.normalize();
         double roll, pitch, yaw;
         tf2::Matrix3x3(q_pose).getRPY(roll, pitch, yaw);
-        const auto relX = relXglobal*std::cos(yaw) + relYglobal*std::sin(yaw);
-        const auto relY = -relXglobal*std::sin(yaw) + relYglobal*std::cos(yaw);
+        const auto relX = relXglobal*std::cos(yaw) - relYglobal*std::sin(yaw);
+        const auto relY = relXglobal*std::sin(yaw) + relYglobal*std::cos(yaw);
         
         
 
