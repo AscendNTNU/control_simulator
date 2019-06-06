@@ -1,0 +1,19 @@
+<launch>
+  <arg name="px4_id"/>
+  <arg name="namespace"/>
+  
+  <group ns="$(arg namespace)">
+      <!-- PX4 launch -->
+      <include file="$(find px4)/launch/px4.launch">
+        <arg name="ID" value="$(arg px4_id)"/>
+        <arg name="est" value="ekf2"/>
+        <arg name="interactive" value="false"/>
+      </include>
+
+      <!-- Perception and AI emulation -->
+      <node name="positioning_node" pkg="control_simulator" type="positioning_node" output="screen">
+        <param name="drone_name" type="str" value="ascend_drone_$(arg px4_id)"/>
+      </node>
+      <node name="obstacle_publisher_node" pkg="control_simulator" type="obstacle_publisher_node"/>
+  </group>
+</launch>

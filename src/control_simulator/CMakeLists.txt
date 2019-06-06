@@ -165,7 +165,9 @@ include_directories(SYSTEM ${GAZEBO_INCLUDE_DIRS})
 link_directories(${GAZEBO_LIBRARY_DIRS})
 #list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
 add_library(enemy_drone SHARED src/gazebo_plugins/enemy_drone.cc)
+add_library(parrot SHARED src/gazebo_plugins/parrot.cc)
 target_link_libraries(enemy_drone ${gazebo_LIBRARIES})
+target_link_libraries(parrot ${gazebo_LIBRARIES})
 
 #############
 ## Install ##
