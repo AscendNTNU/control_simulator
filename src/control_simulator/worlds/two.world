@@ -12,10 +12,12 @@
     </include>
     <include>
       <uri>model://ascend_drone_1</uri>
+      <name>drone_1</name>
       <pose>-4.0 -8.0 0.83 0 0 0</pose>
     </include>
     <include>
       <uri>model://ascend_drone_2</uri>
+      <name>drone_2</name>
       <pose>4.0 -8.0 0.83 0 0 0</pose>
     </include>
     <include>

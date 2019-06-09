@@ -3,6 +3,7 @@
 #include <map>
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/Pose.h>
+#include <tf/transform_broadcaster.h>
 #include <gazebo_msgs/ModelStates.h>
 #include <mavros_msgs/WaypointList.h>
 #include <mavros_msgs/ParamSet.h>
@@ -10,30 +11,63 @@
 class DronePosePub {
   private:
     const std::string name;
-    ros::Publisher pub;
+    ros::Subscriber gzSub;
+    ros::Publisher posePub;
+    tf::TransformBroadcaster tfPub;
+
+    bool recievedPose = false;
+    geometry_msgs::Pose pose;
+
+    void gazeboModelStatesCallback(gazebo_msgs::ModelStates::ConstPtr msg) {
+      const auto it = std::find(msg->name.cbegin(), msg->name.cend(), this->getName());
+      if (it == msg->name.cend()) {
+        ROS_WARN_THROTTLE(20, "could not find %s in model_states", name.c_str());
+        return;
+      }
+      recievedPose = true;
+      ROS_INFO_ONCE("Found %s in model_states", this->getName().c_str());
+      const size_t index = std::distance(msg->name.cbegin(), it);
+      pose = msg->pose[index];
+    }
 
   public:
     DronePosePub(ros::NodeHandle& nh, const std::string& name, const std::string& topic) 
-        : name(name)
-    {
-      pub = nh.advertise<geometry_msgs::PoseStamped>(topic, 1);
+        : name(name) {
+      posePub = nh.advertise<geometry_msgs::PoseStamped>(topic, 1);
+      gzSub = nh.subscribe("/gazebo/model_states", 1, &DronePosePub::gazeboModelStatesCallback, this);
     }
 
-    std::string getName() const { return name; }
+    std::string getName() const { 
+      return name; 
+    }
 
-    void publish(geometry_msgs::Pose pose) const {
-      geometry_msgs::PoseStamped poseStamped;
-      poseStamped.header.stamp = ros::Time::now();
-      poseStamped.header.frame_id = "map";
-      poseStamped.pose = pose;
+    void publish() {
+      if (recievedPose) {
+        geometry_msgs::PoseStamped poseStamped;
+        poseStamped.header.stamp = ros::Time::now();
+        poseStamped.header.frame_id = "map";
+        poseStamped.pose = pose;
+        posePub.publish(poseStamped);
 
-      pub.publish(poseStamped);
+        tf::Transform tf;
+        const auto& pos = pose.position;
+        tf.setOrigin({pos.x, pos.y, pos.z});
+        const auto& quat = pose.orientation;
+        tf.setRotation({quat.x, quat.y, quat.z, quat.w});
+
+        tfPub.sendTransform(tf::StampedTransform(tf, ros::Time::now(), "world", getName() + "/base_link"));
+      }
     }
 };
 
-gazebo_msgs::ModelStates::ConstPtr modelStatesMsg;
-void gazeboModelStatesCallback(gazebo_msgs::ModelStates::ConstPtr msg) {
-  modelStatesMsg = msg;
+void mavparamIntSet(ros::NodeHandle& nh, const std::string& param_id, int value) {
+  ros::ServiceClient mavparam = nh.serviceClient<mavros_msgs::ParamSet>("mavros/param/set");
+  mavros_msgs::ParamSet ps;
+  ps.request.param_id = param_id;
+  ps.request.value.integer = value;
+  if (!mavparam.call(ps) || !ps.response.success) {
+      ROS_WARN("Failed to set %s, please set manually to %ld", ps.request.param_id.c_str(), ps.request.value.integer);
+  }
 }
 
 int main(int argc, char** argv) {
@@ -50,45 +84,18 @@ int main(int argc, char** argv) {
   }
   ROS_INFO("Positioning node uses drone_name %s", drone_name_gazebo.c_str());
 
-  ros::Subscriber sub = nh.subscribe("/gazebo/model_states", 1, gazeboModelStatesCallback);
   ros::topic::waitForMessage<mavros_msgs::WaypointList>("mavros/mission/waypoints");
-  ros::ServiceClient mavparam = nh.serviceClient<mavros_msgs::ParamSet>("mavros/param/set");
-  mavros_msgs::ParamSet ps;
-  ps.request.param_id = "EKF2_AID_MASK";
-  ps.request.value.integer = 24; // vision_pose and vision_yaw fusion
-  if (!mavparam.call(ps) || !ps.response.success) {
-      ROS_WARN("Failed to set %s, please set manually to %ld to get global positioning", ps.request.param_id.c_str(), ps.request.value.integer);
-  }
+  mavparamIntSet(nh, "EKF2_AID_MASK", 24); // vision_pose and vision_yaw fusion
   
   //std::vector<std::string> droneNames = {"alpha", "bravo"};
-  std::vector<DronePosePub> dronePubs;
-  dronePubs.emplace_back(nh, drone_name_gazebo, "mavros/vision_pose/pose");
+  DronePosePub dronePub(nh, drone_name_gazebo, "mavros/vision_pose/pose");
 
   ros::Rate rate(10);
   while (ros::ok()) {
     ros::spinOnce();
     rate.sleep();
 
-    if (!modelStatesMsg) {
-      continue;
-    }
-
-    // extract dronePoses from msg
-    bool found = false;
-    for (const auto& dronePub : dronePubs) {
-      const auto it = std::find(modelStatesMsg->name.cbegin(), modelStatesMsg->name.cend(), dronePub.getName());
-      if (it == modelStatesMsg->name.cend()) {
-        continue;
-      }
-      ROS_INFO_ONCE("Found %s in model_states", drone_name_gazebo.c_str());
-      found = true;
-      const size_t index = std::distance(modelStatesMsg->name.cbegin(), it);
-      dronePub.publish(modelStatesMsg->pose[index]);
-    }
-    
-    if (!found) {
-        ROS_WARN_THROTTLE(20, "could not find %s in model_states", drone_name_gazebo.c_str());
-    }
+    dronePub.publish();
   }
 
   return 0;
