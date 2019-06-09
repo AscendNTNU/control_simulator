@@ -60,14 +60,22 @@ class DronePosePub {
     }
 };
 
-void mavparamIntSet(ros::NodeHandle& nh, const std::string& param_id, int value) {
+bool mavparamIntSet(ros::NodeHandle& nh, const std::string& param_id, int value) {
+  ROS_INFO("Setting %s to %i", param_id.c_str(), value);
   ros::ServiceClient mavparam = nh.serviceClient<mavros_msgs::ParamSet>("mavros/param/set");
   mavros_msgs::ParamSet ps;
   ps.request.param_id = param_id;
   ps.request.value.integer = value;
   if (!mavparam.call(ps) || !ps.response.success) {
       ROS_WARN("Failed to set %s, please set manually to %ld", ps.request.param_id.c_str(), ps.request.value.integer);
+  } else {
+
   }
+}
+
+bool waypoint_recieved = false;
+void wpListCb(mavros_msgs::WaypointList::ConstPtr msg) {
+  waypoint_recieved = true;
 }
 
 int main(int argc, char** argv) {
@@ -84,8 +92,8 @@ int main(int argc, char** argv) {
   }
   ROS_INFO("Positioning node uses drone_name %s", drone_name_gazebo.c_str());
 
-  ros::topic::waitForMessage<mavros_msgs::WaypointList>("mavros/mission/waypoints");
-  mavparamIntSet(nh, "EKF2_AID_MASK", 24); // vision_pose and vision_yaw fusion
+  ros::Subscriber wpSub = nh.subscribe("mavros/mission/waypoints", 1, wpListCb);
+  bool mavparam_set = false;
   
   //std::vector<std::string> droneNames = {"alpha", "bravo"};
   DronePosePub dronePub(nh, drone_name_gazebo, "mavros/vision_pose/pose");
@@ -96,6 +104,14 @@ int main(int argc, char** argv) {
     rate.sleep();
 
     dronePub.publish();
+
+    if (waypoint_recieved && !mavparam_set) {
+      const bool success = mavparamIntSet(nh, "EKF2_AID_MASK", 24); // vision_pose and vision_yaw fusion
+      mavparam_set = success;
+      if (success) {
+        wpSub.shutdown(); // subscriber is not longer needed
+      }
+    }
   }
 
   return 0;
