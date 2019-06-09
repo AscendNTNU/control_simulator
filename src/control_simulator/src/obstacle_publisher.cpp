@@ -1,9 +1,13 @@
 #include <ros/ros.h>
+#include <tf2/LinearMath/Quaternion.h>
+#include <tf2/LinearMath/Matrix3x3.h>
+
+#include <std_msgs/String.h>
 #include <gazebo_msgs/ModelStates.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/Point32.h>
-#include <std_msgs/String.h>
 #include <ascend_msgs/ObstacleBoundingBoxes.h>
+
 #include <functional>
 #include <string>
 
@@ -45,10 +49,19 @@ int main(int argc, char** argv) {
     const auto& pose = modelStatesMsg->pose;
     for (int i = 0; i < len; i++) {
       if (name[i].find("obstacle") != std::string::npos) {
-        // Relative position
-        // TODO: does this need to be rotated relative to the drone
-        const auto relX = pose[i].position.x - dronePoseMsg->pose.position.x;
-        const auto relY = pose[i].position.y - dronePoseMsg->pose.position.y;
+        // Relative position in global frame
+        const auto relXglobal = pose[i].position.x - dronePoseMsg->pose.position.x;
+        const auto relYglobal = pose[i].position.y - dronePoseMsg->pose.position.y;
+        
+        // Need to rotate to get relative position in local frame
+        tf2::Quaternion q_pose{ pose[i].orientation.x, pose[i].orientation.y, pose[i].orientation.z, pose[i].orientation.w}; 
+        q_pose.normalize();
+        double roll, pitch, yaw;
+        tf2::Matrix3x3(q_pose).getRPY(roll, pitch, yaw);
+        const auto relX = relXglobal*std::cos(yaw) - relYglobal*std::sin(yaw);
+        const auto relY = relXglobal*std::sin(yaw) + relYglobal*std::cos(yaw);
+        
+        
 
         // Build bounding boxes and calculate distances
         geometry_msgs::Point32 minPoint;

@@ -57,7 +57,6 @@
   <build_export_depend>ascend_msgs</build_export_depend>
   <build_export_depend>mavros_msgs</build_export_depend>
   <build_export_depend>roscpp</build_export_depend>
-  <exec_depend>ascend_utils</exec_depend>
   <exec_depend>ascend_msgs</exec_depend>
   <exec_depend>gazebo_msgs</exec_depend>
   <exec_depend>mavros_msgs</exec_depend>

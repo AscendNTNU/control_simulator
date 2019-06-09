@@ -18,12 +18,9 @@
   </include>
   <node if="$(eval arg('client') == 'gzweb')" respawn="true" name="gzweb_node" pkg="control_simulator" type="gzweb.sh" args="$(arg gzweb_dir) $(arg gzweb_port)"/>
 
-  <!-- PX4 launch -->
-  <include file="$(find px4)/launch/px4.launch">
-    <arg name="ID" value="0"/>
-    <arg name="est" value="lpe"/>
-    <arg name="interactive" value="false"/>
+  <!-- Drone backend -->
+  <include file="$(find control_simulator)/launch/drone_backend.launch">
+      <arg name="px4_id" value="1"/>
+      <arg name="namespace" value="drone_1"/>
   </include>
-
-  <node name="positioning_node" pkg="control_simulator" type="positioning_node" output="screen"/>
 </launch>

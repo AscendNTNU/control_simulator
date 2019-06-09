@@ -19,7 +19,7 @@ void setBuildStatus(String message, String context, String state) {
       // Also, the sh command actually executed is not properly logged, it will be further escaped when written to the log
         sh """
             set -x
-            curl \"https://api.github.com/repos/org/repo/statuses/$GIT_COMMIT?access_token=$TOKEN\" \
+            curl \"https://api.github.com/repos/org/repo/statuses/${env.GIT_COMMIT}?access_token=$TOKEN\" \
                 -H \"Content-Type: application/json\" \
                 -X POST \
                 -d \"{\\\"description\\\": \\\"$message\\\", \\\"state\\\": \\\"$state\\\", \\\"context\\\": \\\"$context\\\", \\\"target_url\\\": \\\"$BUILD_URL\\\"}\"
@@ -33,6 +33,7 @@ pipeline {
     stages {
         stage('Compilation') {
             steps {
+              
               sh "docker build -t ${env.JOB_NAME}:${env.GIT_COMMIT} .".toLowerCase().replace("%2f", "/")
             }
         }
