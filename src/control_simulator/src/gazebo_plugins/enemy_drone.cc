@@ -5,6 +5,8 @@
 #include <gazebo/common/common.hh>
 #include <ignition/math/Vector3.hh>
 
+#include "./gazebo_version_defines.h"
+
 namespace gazebo 
 {
   class ModelPush : public ModelPlugin
@@ -18,7 +20,7 @@ namespace gazebo
               y_min = _sdf->GetElement("y_min")->Get<float>();
               y_max = _sdf->GetElement("y_max")->Get<float>();
 
-              const float z_curr = this->model->GetWorldPose().pos.z;
+              const float z_curr = EXTRACT_Z(EXTRACT_POS(WORLD_POSE(this->model)));
               altitude = z_curr;
               if (_sdf->HasElement("altitude")) {
                   // override if altitude is specified
@@ -57,9 +59,9 @@ namespace gazebo
                 change_time = time_distribution(generator);
               }
 
-              const float x_curr = this->model->GetWorldPose().pos.x;
-              const float y_curr = this->model->GetWorldPose().pos.y;
-              const float z_curr = this->model->GetWorldPose().pos.z;
+              const float x_curr = EXTRACT_X(EXTRACT_POS(WORLD_POSE(this->model)));
+              const float y_curr = EXTRACT_Y(EXTRACT_POS(WORLD_POSE(this->model)));
+              const float z_curr = EXTRACT_Z(EXTRACT_POS(WORLD_POSE(this->model)));
 
               const float Kp = 0.1f;
 
